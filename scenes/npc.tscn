@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds55apat6kv6b"]
+
+[ext_resource type="Texture2D" uid="uid://jrm52gw631ji" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/BlueNinja/SpriteSheet.png" id="1_wxl3m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_skei2"]
+size = Vector2(8, 5)
+
+[node name="NPC" type="CharacterBody2D"]
+motion_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wxl3m")
+hframes = 4
+vframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_skei2")

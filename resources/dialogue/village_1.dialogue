@@ -1,0 +1,102 @@
+~ Ashley
+
+if Village1.found_Ashleys_cat == "has":
+	Ashley: Is that my kitty?
+	- Yeah, she was in a tree.
+		set Village1.found_Ashleys_cat = "gave"
+		set Village1.quests_completed += 1
+		Ashley: Oh my god! Now I can hit the griddy with her! Thank you!
+	- Naw, this kitty doesn't hit the griddy.
+		Ashley: Awwuh! Titty twisters!
+elif Village1.found_Ashleys_cat == "gave":
+	Ashley: Thanks for finding my Kitty. Now I can hit the griddy with her.
+else:
+	Ashley: Yo, I'm missing my little kitty. She's usually hitting the griddy. have you seen her?
+
+=> has_completed_all_quests
+
+
+~ Jill
+
+if Village1.undead_killed >= 5:
+	Jill: You've killed all the undead. Elders can now pray for their lost ones in peace. Thanks for helping out the town again.
+	set Village1.quests_completed += 1
+else:
+	Jill: The graveyard is over ran with undead. It's no longer safe for elders to visit. Can you get rid of them?
+
+=> has_completed_all_quests
+
+
+~ Roe
+
+if Village1.roes_milk == "has":
+	Roe: Have you found my milk?
+	- Yes, it was behind your shop!
+		set Village1.roes_milk = "gave"
+		set Village1.quests_completed += 1
+		do emit("gave_item", "Roes Milk")
+		Roe: Thank you! Now I can get back to selling food!
+	- No, I found this somewhere else.
+elif Village1.roes_milk == "gave":
+	Roe: Thank you for finding my milk. I can sell my food now.
+else:
+	Roe: Sorry, but I need help finding my milk. Can you help me?
+
+=> has_completed_all_quests
+
+
+~ cat
+
+Cat: Meow
+set Village1.found_Ashleys_cat = "has"
+do emit("found_cat")
+=> END
+
+~ has_completed_all_quests
+if Village1.quests_completed == 3 and not Village1.permission_to_leave:
+	=> Talk_to_Chief_Dave
+=> END
+
+
+~ Yellow_Town_Guard
+
+if not Village1.permission_to_leave:
+	Yellow(Town Guard): Can't let you pass. Not safe.
+else:
+	Yellow(Town Guard): Chief Dave gave permission to let you pass.
+
+=> END
+
+
+~ Talk_to_Chief_Dave
+
+Chief Dave was asking for you earlier. You should go see him.
+
+=> END
+
+
+~ Chief_Dave
+if not Village1.permission_to_leave:
+	Chief Dave: Good Morning!
+	
+	if Village1.quests_completed == 3:
+		Chief Dave: I've been meaning to talk to you.
+		Chief Dave: You've always been helpful around the town and I believe you can do better.
+		Chief Dave: Just like your parents, you have a fine aptitude for Knighthood. You should travel to the Kingdom and apply.
+		
+		Chief Dave: I've let Yellow, the Towns Guard, know that you're ready to leave.
+		do Village1.permission_to_leave_town()
+		
+		Chief Dave: Also! Take this.
+		Received {{Village1.parents_sword_name}}!
+		do Village1.give_parents_sword()
+		Chief Dave: Your parents gave the Town this sword for protection.
+		Chief Dave: I believe it'll be better put into your hands.
+		
+		Chief Dave: Good luck!
+else:
+	Chief Dave: Good luck on your adventure.
+
+
+=> END
+

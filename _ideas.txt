@@ -1,0 +1,46 @@
+
+
+Story
+Kid loses only parent cuz his father couldn't pay for rent
+-start scene... father taken away at young age
+-start game... village chief has raised you till you decide you're old enough to
+travel.
+  -do 3 tasks to leave town
+	- find cat
+	- milk cow
+	- kill 5 skeletons in the graveyard
+-You're known as a young bright mind kid that loves the town folk.
+-As you leave, the kings men come to take the villages taxes but can't pay up
+-You can decide to travel and become a slave to save the village or try to fight 
+ and lose anyway
+
+--------------------------------------------------------------------------------
+
+To Knighthood
+
+Objective
+Become a knight
+	get to the kingdom
+	adventure towns and forests
+		kill creatures
+		complete quests
+		buy and sell equipement
+
+Linear gameplay
+-wakeup in house
+-walk outside
+	greated by the chief
+	told to help around the town like you usually do
+		not told how to help, suppose to find who needs help
+-help villagers
+	ashley, find cat
+	roe, find milk
+	jill, kill zombies in graveyard
+-chief tells you how much he appreicates your help around town
+	tells you should become a knight just like your parents
+	gives you the towns sword made for and used by your parents
+	sends you off
+	town gaurd lets you leave the town
+
+- town gaurd will block the path to the kingdom to prevent the player 
+	from leaving the town

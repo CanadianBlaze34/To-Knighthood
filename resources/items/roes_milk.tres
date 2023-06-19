@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://di4d585s86k28"]
+
+[ext_resource type="Script" path="res://scripts/resources/item/item.gd" id="1_dk7o7"]
+[ext_resource type="Texture2D" uid="uid://ojabqcf5coxs" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Potion/MilkPot.png" id="2_unlhl"]
+
+[resource]
+script = ExtResource("1_dk7o7")
+name = "Roes Milk"
+texture = ExtResource("2_unlhl")

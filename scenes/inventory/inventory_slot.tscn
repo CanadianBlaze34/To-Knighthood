@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgvi606otxrwb"]
+
+[ext_resource type="Texture2D" uid="uid://dcibt47ppuvhg" path="res://images/InventorySlot.png" id="1_uc63m"]
+[ext_resource type="Script" path="res://scripts/inventory/inventory_slot.gd" id="2_7xl3h"]
+[ext_resource type="Script" path="res://scripts/inventory/item_slot.gd" id="3_mpwok"]
+
+[node name="Slot" type="TextureRect"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("1_uc63m")
+script = ExtResource("2_7xl3h")
+
+[node name="ItemContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemSlot" type="TextureRect" parent="ItemContainer"]
+layout_mode = 2
+script = ExtResource("3_mpwok")

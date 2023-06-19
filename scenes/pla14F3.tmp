@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://bghvtati0dphu"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_30jbq"]
+[ext_resource type="Resource" uid="uid://cjwyppwnlyywu" path="res://resources/items/hands.tres" id="2_kar3c"]
+[ext_resource type="Texture2D" uid="uid://brxqvoxw8tnyr" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Boy/SeparateAnim/Walk.png" id="2_lq0t5"]
+[ext_resource type="Script" path="res://scripts/player/player_dialogic_area.gd" id="3_3mieo"]
+[ext_resource type="PackedScene" uid="uid://bbwlqef08rqh3" path="res://scenes/inventory/inventory.tscn" id="3_vn67f"]
+[ext_resource type="Script" path="res://scripts/player/player_pickupable_item_area.gd" id="4_dpg8e"]
+[ext_resource type="Texture2D" uid="uid://c0m763lndqp1l" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Weapons/Axe/Sprite.png" id="7_h6ndu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fc5dt"]
+radius = 17.0294
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xc3v7"]
+radius = 17.0294
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pbeg1"]
+
+[node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+motion_mode = 1
+script = ExtResource("1_30jbq")
+weapon = ExtResource("2_kar3c")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_lq0t5")
+hframes = 4
+vframes = 4
+
+[node name="DialogicArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("3_3mieo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogicArea"]
+shape = SubResource("CircleShape2D_fc5dt")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="UI" instance=ExtResource("3_vn67f")]
+offset_left = 44.0
+offset_top = 4.0
+offset_right = 156.0
+offset_bottom = 40.0
+inventory_size = 20
+
+[node name="PickupableItemArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("4_dpg8e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupableItemArea"]
+shape = SubResource("CircleShape2D_xc3v7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_pbeg1")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="WeaponPivot" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="EquipableWeapon" type="Sprite2D" parent="WeaponPivot"]
+position = Vector2(9, 0)
+rotation = 1.5708
+texture = ExtResource("7_h6ndu")
+
+[connection signal="area_entered" from="DialogicArea" to="DialogicArea" method="_on_area_entered"]
+[connection signal="area_exited" from="DialogicArea" to="DialogicArea" method="_on_area_exited"]
+[connection signal="drop_item" from="UI/Inventory" to="." method="_on_inventory_drop_item"]
+[connection signal="equip_item" from="UI/Inventory" to="." method="_on_inventory_equip_item"]
+[connection signal="area_entered" from="PickupableItemArea" to="PickupableItemArea" method="_on_area_entered"]
+[connection signal="area_exited" from="PickupableItemArea" to="PickupableItemArea" method="_on_area_exited"]
+[connection signal="item_pickup" from="PickupableItemArea" to="." method="_on_pickupable_item_pickup"]
