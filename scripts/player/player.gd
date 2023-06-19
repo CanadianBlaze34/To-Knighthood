@@ -13,10 +13,15 @@ var attacking : bool = true
 @onready var movement: Movement = $movement
 
 
+var save_global_position : SaveVector2
+
 func _ready() -> void:
+	save_global_position = SaveVector2.new()
+	save_global_position.init("player_position", Vector2(87.0, 50.0))
 	# remove any items from the inventory when given to an npc
 	# through Dialogue Manager
 	Village1.gave_item.connect(inventory.remove_item_by_name)
+	SaveLoad.loaded.connect(func (): global_position = save_global_position.value)
 
 
 func _input(event: InputEvent) -> void:

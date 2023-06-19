@@ -29,6 +29,7 @@ func _disable_load_button() -> bool:
 
 
 func _load_game() -> void:
+	
 	# remove the title scene
 	call_deferred("queue_free")
 	

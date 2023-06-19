@@ -1,12 +1,21 @@
 class_name Main extends Node2D
 
 @onready var player: Player = $Player
-var active_scene : Node
+#var active_scene : Node
+var active_scene : SaveVariable
 
 
 func _ready() -> void:
-	_load_scene()
-	_load_player_position()
+	active_scene = SaveVariable.new()
+	active_scene.init("scene", "res://scenes/player_room.tscn")
+#	active_scene.value = get_child(get_child_count() - 1).get_scene_file_path()
+
+#	_load_scene()
+	SaveLoad.load_variables()
+#	_load_player_position()
+	
+	var loaded_scene = load(active_scene.value).instantiate()
+	call_deferred("add_child", loaded_scene)
 
 
 func _input(event: InputEvent) -> void:
@@ -25,7 +34,7 @@ func _title_menu() -> void:
 
 func _save() -> void:
 	var data : Dictionary = {}
-	data.merge(_get_save_scene(), true)
+#	data.merge(_get_save_scene(), true)
 	data.merge(_get_save_player_position(), true)
 	SaveLoad.save(data)
 	print("Saved player position and scene.")
@@ -98,7 +107,12 @@ func _get_save_player_position() -> Dictionary:
 
 
 func _on_child_entered_tree(node: Node) -> void:
-	active_scene = node
+	# _ready is called after this
+	# will set when initializing main node
+	if node is Player:
+		return
+	active_scene.value = node.get_scene_file_path()
+	
 
 
 

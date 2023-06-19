@@ -13,19 +13,56 @@ var _disable_saving : bool = false
 
 const save_file_extension : String = ".save"
 
+var variables : Array[SaveVariable]
 
-func __ready() -> void:
-	
-	var successful_load : bool = _try_load_data_from_save_file()
-	
-	if not successful_load:
-		# no file to load from
-		# create save file
-		# disable saving if the save file could not be created
-		_disable_saving = not SaveSystem._create_save_file(_save_file_name)
+signal loaded
 
+func _ready() -> void:
+	
+#	var successful_load : bool = _try_load_data_from_save_file()
+#
+#	if not successful_load:
+#		# no file to load from
+#		# create save file
+#		# disable saving if the save file could not be created
+#		_disable_saving = not SaveSystem._create_save_file(_save_file_name)
+	pass
+
+func append_variable(new_variable : SaveVariable) -> void:
+	
+	for variable in variables:
+		if variable.variable_name == new_variable.variable_name:
+			return
+	
+	print("Append '%s' SaveVariable." % [new_variable.variable_name])
+	variables.append(new_variable)
 
 # loading
+
+func clear_variables() -> void:
+	variables.clear()
+
+
+func load_variables() -> void:
+	if variables.is_empty():
+		return
+	
+	print("Loading from save '%s'." % [_save_file_name])
+	
+	var not_in_file : bool = false
+	
+	for variable in variables:
+#		print(variable.variable_name)
+#		if variable.variable_name in _data:
+#			variable.value = _data[variable.variable_name]
+		if variable.load_variable(_data):
+			not_in_file = true
+#			print("loading '%s' to '%s'." % [variable.variable_name, variable.value])
+	if not_in_file:
+		quick_save()
+	
+	loaded.emit()
+
 
 func _try_load_data_from_save_file() -> bool:
 	# returns true on a succesful file load
@@ -92,7 +129,24 @@ static func _filter_files(file_names: PackedStringArray, extension : String, rem
 
 # saving
 
-func save(data : Dictionary) -> bool:
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("save"):
+		print("Saving '%s'." % [_save_file_name])
+		if variables.is_empty():
+			return
+#		var data : Dictionary = {}
+		for variable in variables:
+			variable.save_variable(_data)
+#			data[variable.variable_name] = variable.value
+#			print("saving '%s' as '%s'." % [variable.variable_name, variable.value])
+		quick_save()
+
+
+func quick_save() -> bool:
+	return save(_data, false)
+
+
+func save(data : Dictionary, merge : bool = true) -> bool:
 	# returns true on a succesful save to file
 	
 	if _disable_saving:
@@ -106,8 +160,8 @@ func save(data : Dictionary) -> bool:
 	
 	
 	# append/overwrite data to self._data
-#	if append:
-	self._data.merge(data, true)
+	if merge:
+		self._data.merge(data, true)
 #	else:
 #		for key in data.keys():
 #			self._data[key] = data[key]
@@ -120,7 +174,7 @@ func save(data : Dictionary) -> bool:
 	# overwrite the save file as a single line.
 	save_file.store_line(json_string)
 	
-	
+	print("Saved save file '%s'." % [_save_file_name])
 	return true
 
 
@@ -142,6 +196,7 @@ func set_save(save_name : String)  -> void:
 
 
 func new_save(name_ : String) -> void:
+#	clear_variables()
 	change_save(name_)
 	SaveSystem._create_save_file(_save_file_name)
 	_try_load_data_from_save_file()

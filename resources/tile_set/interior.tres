@@ -1,14 +1,14 @@
 [gd_resource type="TileSet" load_steps=11 format=3 uid="uid://d4im3ysk41bcs"]
 
-[ext_resource type="Texture2D" uid="uid://dob1knlj0lqmc" path="res://assets/NinjaAdventure(SupporterEdition)/Backgrounds/Tilesets/Interior/Elements.png" id="1_fofif"]
-[ext_resource type="Texture2D" uid="uid://dowccxhm7ssul" path="res://assets/NinjaAdventure(SupporterEdition)/Backgrounds/Tilesets/TilesetElement.png" id="2_41mec"]
-[ext_resource type="Texture2D" uid="uid://doxlphyc2sdyj" path="res://assets/NinjaAdventure(SupporterEdition)/Backgrounds/Tilesets/Interior/TilesetWallSimple.png" id="3_74u7b"]
-[ext_resource type="Texture2D" uid="uid://dh5mili8u6pa2" path="res://assets/NinjaAdventure(SupporterEdition)/Backgrounds/Tilesets/Interior/TilesetInterior.png" id="4_3kytk"]
-[ext_resource type="Texture2D" uid="uid://bys7efmjlk21h" path="res://assets/NinjaAdventure(SupporterEdition)/Backgrounds/Tilesets/Interior/TilesetInteriorFloor.png" id="5_txnp8"]
+[ext_resource type="Texture2D" uid="uid://dob1knlj0lqmc" path="res://assets/NinjaAdventure(SupporterEdition)/Backgrounds/Tilesets/Interior/Elements.png" id="1_to3el"]
+[ext_resource type="Texture2D" uid="uid://dowccxhm7ssul" path="res://assets/NinjaAdventure(SupporterEdition)/Backgrounds/Tilesets/TilesetElement.png" id="2_x8hdj"]
+[ext_resource type="Texture2D" uid="uid://doxlphyc2sdyj" path="res://assets/NinjaAdventure(SupporterEdition)/Backgrounds/Tilesets/Interior/TilesetWallSimple.png" id="3_l043w"]
+[ext_resource type="Texture2D" uid="uid://dh5mili8u6pa2" path="res://assets/NinjaAdventure(SupporterEdition)/Backgrounds/Tilesets/Interior/TilesetInterior.png" id="4_npbpy"]
+[ext_resource type="Texture2D" uid="uid://bys7efmjlk21h" path="res://assets/NinjaAdventure(SupporterEdition)/Backgrounds/Tilesets/Interior/TilesetInteriorFloor.png" id="5_x7hj1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tqntd"]
 resource_name = "Elements"
-texture = ExtResource("1_fofif")
+texture = ExtResource("1_to3el")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -72,7 +72,7 @@ texture = ExtResource("1_fofif")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_55qky"]
 resource_name = "Elements 2"
-texture = ExtResource("2_41mec")
+texture = ExtResource("2_x8hdj")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -508,7 +508,7 @@ texture = ExtResource("2_41mec")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qpne3"]
 resource_name = "Wall Simple"
-texture = ExtResource("3_74u7b")
+texture = ExtResource("3_l043w")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -809,7 +809,7 @@ texture = ExtResource("3_74u7b")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_26mpr"]
 resource_name = "Wall"
-texture = ExtResource("4_3kytk")
+texture = ExtResource("4_npbpy")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -1599,7 +1599,7 @@ texture = ExtResource("4_3kytk")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uf60x"]
 resource_name = "Floor"
-texture = ExtResource("5_txnp8")
+texture = ExtResource("5_x7hj1")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0

@@ -1,6 +1,7 @@
 class_name Village_1 extends Node
 
-var found_Ashleys_cat : String = "" # ["has" | "gave"]
+#var found_Ashleys_cat : String = "" # ["has" | "gave"]
+var found_Ashleys_cat : SaveVariable # ["has" | "gave"]
 var quests_completed : int = 0 # 0, 1, 2, 3
 var undead_killed : int = 0 # 0, 1, 2, 3, 4, 5
 var roes_milk : String = "" # ["has" | "gave"]
@@ -15,6 +16,8 @@ signal gave_parents_sword
 
 
 func _ready() -> void:
+	found_Ashleys_cat = SaveVariable.new()
+	found_Ashleys_cat.init("found_Ashleys_cat", "")
 	has_item.connect(_check_item)
 
 
@@ -32,3 +35,4 @@ func permission_to_leave_town() -> void:
 func give_parents_sword() -> void:
 	print("Received %s." % [parents_sword_name])
 	gave_parents_sword.emit()
+

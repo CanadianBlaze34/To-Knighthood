@@ -1,14 +1,14 @@
 ~ Ashley
 
-if Village1.found_Ashleys_cat == "has":
+if Village1.found_Ashleys_cat.value == "has":
 	Ashley: Is that my kitty?
 	- Yeah, she was in a tree.
-		set Village1.found_Ashleys_cat = "gave"
+		set Village1.found_Ashleys_cat.value = "gave"
 		set Village1.quests_completed += 1
 		Ashley: Oh my god! Now I can hit the griddy with her! Thank you!
 	- Naw, this kitty doesn't hit the griddy.
 		Ashley: Awwuh! Titty twisters!
-elif Village1.found_Ashleys_cat == "gave":
+elif Village1.found_Ashleys_cat.value == "gave":
 	Ashley: Thanks for finding my Kitty. Now I can hit the griddy with her.
 else:
 	Ashley: Yo, I'm missing my little kitty. She's usually hitting the griddy. have you seen her?
@@ -48,7 +48,7 @@ else:
 ~ cat
 
 Cat: Meow
-set Village1.found_Ashleys_cat = "has"
+set Village1.found_Ashleys_cat.value = "has"
 do emit("found_cat")
 => END
 
