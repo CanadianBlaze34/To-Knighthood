@@ -16,12 +16,37 @@ var attacking : bool = true
 var save_global_position : SaveVector2
 
 func _ready() -> void:
-	save_global_position = SaveVector2.new()
-	save_global_position.init("player_position", Vector2(87.0, 50.0))
+	_set_save_variables()
+	# load all the variables after the 'SaveLoad.load_variables()' function call in main_2.tscn _ready()
+	SaveLoad.variables_loaded_from_file.connect(_on_variables_loaded_from_file)
+	
 	# remove any items from the inventory when given to an npc
 	# through Dialogue Manager
 	Village1.gave_item.connect(inventory.remove_item_by_name)
-	SaveLoad.loaded.connect(func (): global_position = save_global_position.value)
+
+# SaveVariable ----------------------------------------------------------------
+
+func _set_save_variables() -> void:
+	save_global_position = SaveVector2.new()
+	save_global_position.init("player_position", Vector2(87.0, 50.0))
+
+
+func _on_variables_loaded_from_file() -> void:
+	global_position = save_global_position.value
+
+
+func _free_save_variables() -> void:
+	save_global_position.delete()
+
+
+func _exit_tree() -> void:
+	_free_save_variables()
+
+# ----------------------------------------------------------------
+
+func _process(_delta: float) -> void:
+	if save_global_position.value != global_position:
+		save_global_position.value = global_position
 
 
 func _input(event: InputEvent) -> void:
@@ -121,6 +146,7 @@ func _on_dialogic_area_dialogue_state(in_dialogue : bool) -> void:
 		_disable_attacking()
 	else:
 		_enable_walking()
-		_enable_attacking()
+		if equipable_weapon.texture:
+			_enable_attacking()
 
 

@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=3 uid="uid://bghvtati0dphu"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_x0311"]
-[ext_resource type="Resource" uid="uid://cjwyppwnlyywu" path="res://resources/items/hands.tres" id="2_buly3"]
-[ext_resource type="Texture2D" uid="uid://brxqvoxw8tnyr" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Boy/SeparateAnim/Walk.png" id="3_cm717"]
-[ext_resource type="Script" path="res://scripts/player/player_dialogic_area.gd" id="4_glt7r"]
-[ext_resource type="PackedScene" uid="uid://bbwlqef08rqh3" path="res://scenes/inventory/inventory.tscn" id="5_i3g3h"]
-[ext_resource type="Script" path="res://scripts/player/player_pickupable_item_area.gd" id="6_ij354"]
-[ext_resource type="PackedScene" uid="uid://bywnmmwprecpq" path="res://scenes/attack_box.tscn" id="7_i4b64"]
-[ext_resource type="Script" path="res://scripts/movement.gd" id="8_rp0pj"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_6fb5c"]
+[ext_resource type="Resource" uid="uid://cjwyppwnlyywu" path="res://resources/items/hands.tres" id="2_wg6na"]
+[ext_resource type="Texture2D" uid="uid://brxqvoxw8tnyr" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Boy/SeparateAnim/Walk.png" id="3_lneeo"]
+[ext_resource type="Script" path="res://scripts/player/player_dialogic_area.gd" id="4_02ixq"]
+[ext_resource type="PackedScene" uid="uid://bbwlqef08rqh3" path="res://scenes/inventory/inventory.tscn" id="5_h13tx"]
+[ext_resource type="Script" path="res://scripts/player/player_pickupable_item_area.gd" id="6_4l33k"]
+[ext_resource type="PackedScene" uid="uid://bywnmmwprecpq" path="res://scenes/attack_box.tscn" id="7_n5rkg"]
+[ext_resource type="Script" path="res://scripts/movement.gd" id="8_rubjb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fc5dt"]
 radius = 17.0294
@@ -144,11 +144,11 @@ size = Vector2(10, 5)
 y_sort_enabled = true
 collision_layer = 257
 motion_mode = 1
-script = ExtResource("1_x0311")
-weapon = ExtResource("2_buly3")
+script = ExtResource("1_6fb5c")
+weapon = ExtResource("2_wg6na")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("3_cm717")
+texture = ExtResource("3_lneeo")
 offset = Vector2(0, -3)
 hframes = 4
 vframes = 4
@@ -157,14 +157,14 @@ vframes = 4
 position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 16
-script = ExtResource("4_glt7r")
+script = ExtResource("4_02ixq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogicArea"]
 shape = SubResource("CircleShape2D_fc5dt")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Inventory" parent="UI" instance=ExtResource("5_i3g3h")]
+[node name="Inventory" parent="UI" instance=ExtResource("5_h13tx")]
 offset_left = 44.0
 offset_top = 4.0
 offset_right = 156.0
@@ -175,7 +175,7 @@ inventory_size = 20
 position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 32
-script = ExtResource("6_ij354")
+script = ExtResource("6_4l33k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupableItemArea"]
 shape = SubResource("CircleShape2D_xc3v7")
@@ -192,14 +192,14 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="EquipableWeapon" type="Sprite2D" parent="."]
 position = Vector2(-6, 0)
 
-[node name="AttackBox" parent="." instance=ExtResource("7_i4b64")]
+[node name="AttackBox" parent="." instance=ExtResource("7_n5rkg")]
 
 [node name="CollisionShape2D" parent="AttackBox" index="0"]
 position = Vector2(12.5, 0)
 shape = SubResource("RectangleShape2D_u2t0k")
 
 [node name="movement" type="Node" parent="." node_paths=PackedStringArray("character")]
-script = ExtResource("8_rp0pj")
+script = ExtResource("8_rubjb")
 speed = 150.0
 character = NodePath("..")
 

@@ -28,7 +28,7 @@ func _disable_load_button() -> bool:
 	return load_.disabled
 
 
-func _load_game() -> void:
+func _load_main_scene() -> void:
 	
 	# remove the title scene
 	call_deferred("queue_free")
@@ -41,7 +41,7 @@ func _load_game() -> void:
 
 func _on_new_pressed() -> void:
 	SaveLoad.new_save_auto()
-	_load_game()
+	_load_main_scene()
 
 
 func _set_load_menu_columns() -> void:
@@ -64,12 +64,12 @@ func _make_load_button(save_name: String) -> Button:
 			if event is InputEventMouseButton and event.pressed:
 				match event.button_index:
 					MOUSE_BUTTON_LEFT:
-						SaveLoad.set_save(save_name)
 						print("Loading %s." % [save_name])
-						_load_game()
+						SaveLoad.set_save(save_name)
+						_load_main_scene()
 					MOUSE_BUTTON_RIGHT:
-						SaveLoad.delete_save(save_name)
 						print("deleting %s." % [save_name])
+						SaveLoad.delete_save(save_name)
 						button.queue_free()
 						_set_load_menu_columns()
 						if _disable_load_button():

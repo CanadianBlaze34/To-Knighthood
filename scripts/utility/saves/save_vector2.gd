@@ -1,33 +1,30 @@
 class_name SaveVector2 extends SaveVariable
 
 
-func init(variable_name_ : String, value_ : Vector2) -> void:
-	variable_name = variable_name_
-	value = value_
-	SaveLoad.append_variable(self)
-#	print("Init Vector2 '%s'." % [variable_name])
+func init(variable_name_ : String, default_value : Vector2) -> void:
+	super.init(variable_name_, default_value)
 
 
 func variable_name_x() -> String:
-	return variable_name + "_x"
+	return name + "_x"
 
 
 func variable_name_y() -> String:
-	return variable_name + "_y"
+	return name + "_y"
 
 
 func load_variable(data : Dictionary) -> bool:
 #	assert("'load_variable' not implemented in child class '%s'." % name)
-#	var data := SaveLoad.get_loaded([var_to_str(variable_name)])
+#	var data := SaveLoad.get_loaded([var_to_str(name)])
 	
 	var not_in_file : bool = false
 	
 	if variable_name_x() in data:
-		value.x = str_to_var(data[variable_name_x()])
-		value.y = str_to_var(data[variable_name_y()])
-		print("Load: '%s' = '%v'." % [variable_name, value])
+		var new_value := Vector2(float(data[variable_name_x()]), float(data[variable_name_y()]))
+		set_value(new_value)
+		print("Load: '%s' = '%v'." % [name, value])
 	else:
-		print("Cant load: '%s'." % [variable_name])
+		print("Cant load: '%s'." % [name])
 		save_variable(data)
 		not_in_file = true
 	
@@ -36,8 +33,20 @@ func load_variable(data : Dictionary) -> bool:
 
 func save_variable(data : Dictionary) -> void:
 #	assert("'save_variable' not implemented in child class '%s'." % name)
-	assert(value, "No default value for '%s' to save. Initialize 'value' with a default Vector2" % [variable_name])
-	print("Save: '%s' = '%v'." % [variable_name, value])
+	assert(value, "No default value for '%s' to save. Initialize 'value' with a default Vector2" % [name])
+	print("Save: '%s' = '%v'." % [name, value])
 #	SaveLoad.save(get_save())
 	data[variable_name_x()] = str(value.x)
 	data[variable_name_y()] = str(value.y)
+
+
+
+
+
+
+
+
+
+
+
+

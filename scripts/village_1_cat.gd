@@ -1,7 +1,10 @@
 class_name Village1Cat extends CharacterBody2D
 
 func _ready() -> void:
-	connect_signal()
+	if Village1.spawn_ashleys_cat():
+		connect_signal()
+	else:
+		queue_free()
 
 
 func connect_signal() -> void:

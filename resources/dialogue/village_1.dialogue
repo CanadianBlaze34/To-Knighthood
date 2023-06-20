@@ -1,26 +1,25 @@
 ~ Ashley
 
-if Village1.found_Ashleys_cat.value == "has":
+if Village1.is_ashleys_cat_found() == true:
 	Ashley: Is that my kitty?
 	- Yeah, she was in a tree.
-		set Village1.found_Ashleys_cat.value = "gave"
-		set Village1.quests_completed += 1
+		do Village1.give_ashleys_cat()
 		Ashley: Oh my god! Now I can hit the griddy with her! Thank you!
 	- Naw, this kitty doesn't hit the griddy.
 		Ashley: Awwuh! Titty twisters!
-elif Village1.found_Ashleys_cat.value == "gave":
+elif Village1.gave_ashleys_cat() == true:
 	Ashley: Thanks for finding my Kitty. Now I can hit the griddy with her.
 else:
 	Ashley: Yo, I'm missing my little kitty. She's usually hitting the griddy. have you seen her?
 
 => has_completed_all_quests
-
+gave_ashleys_cat
 
 ~ Jill
 
-if Village1.undead_killed >= 5:
+if Village1.killed_all_undead() == true:
 	Jill: You've killed all the undead. Elders can now pray for their lost ones in peace. Thanks for helping out the town again.
-	set Village1.quests_completed += 1
+	set Village1.all_undead_are_killed()
 else:
 	Jill: The graveyard is over ran with undead. It's no longer safe for elders to visit. Can you get rid of them?
 
@@ -29,15 +28,13 @@ else:
 
 ~ Roe
 
-if Village1.roes_milk == "has":
+if Village1.is_roes_milk_found() == true:
 	Roe: Have you found my milk?
 	- Yes, it was behind your shop!
-		set Village1.roes_milk = "gave"
-		set Village1.quests_completed += 1
-		do emit("gave_item", "Roes Milk")
+		do give_roes_milk()
 		Roe: Thank you! Now I can get back to selling food!
 	- No, I found this somewhere else.
-elif Village1.roes_milk == "gave":
+elif Village1.gave_roes_milk() == true:
 	Roe: Thank you for finding my milk. I can sell my food now.
 else:
 	Roe: Sorry, but I need help finding my milk. Can you help me?
@@ -48,12 +45,11 @@ else:
 ~ cat
 
 Cat: Meow
-set Village1.found_Ashleys_cat.value = "has"
-do emit("found_cat")
+do Village1.found_ashleys_cat()
 => END
 
 ~ has_completed_all_quests
-if Village1.quests_completed == 3 and not Village1.permission_to_leave:
+if Village1.completed_all_quests() == true and not Village1.permission_to_leave:
 	=> Talk_to_Chief_Dave
 => END
 
@@ -79,7 +75,7 @@ Chief Dave was asking for you earlier. You should go see him.
 if not Village1.permission_to_leave:
 	Chief Dave: Good Morning!
 	
-	if Village1.quests_completed == 3:
+	if Village1.completed_all_quests() == true:
 		Chief Dave: I've been meaning to talk to you.
 		Chief Dave: You've always been helpful around the town and I believe you can do better.
 		Chief Dave: Just like your parents, you have a fine aptitude for Knighthood. You should travel to the Kingdom and apply.

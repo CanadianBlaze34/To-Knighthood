@@ -6,9 +6,10 @@ extends Node2D
 func _ready() -> void:
 	Village1.permission_granted_to_leave_town.connect(_on_permission_to_leave_town)
 
+
 func _on_monsters_child_exiting_tree(node: Node) -> void:
 	if node is Skeleton:
-		Village1.undead_killed += 1
+		Village1.killed_undead()
 		print("%s died in village1." % [node.name])
 
 

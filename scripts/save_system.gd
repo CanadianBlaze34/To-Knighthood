@@ -15,7 +15,8 @@ const save_file_extension : String = ".save"
 
 var variables : Array[SaveVariable]
 
-signal loaded
+signal save_changed
+signal variables_loaded_from_file
 
 func _ready() -> void:
 	
@@ -28,19 +29,19 @@ func _ready() -> void:
 #		_disable_saving = not SaveSystem._create_save_file(_save_file_name)
 	pass
 
-func append_variable(new_variable : SaveVariable) -> void:
-	
-	for variable in variables:
-		if variable.variable_name == new_variable.variable_name:
-			return
-	
-	print("Append '%s' SaveVariable." % [new_variable.variable_name])
-	variables.append(new_variable)
+#func append_variable(new_variable : SaveVariable) -> void:
+#
+#	# overwrites the previous SaveVariable object with the 'new_variable' SaveVariable object
+#
+#	for variable in variables:
+#		if variable.name == new_variable.name:
+#			return
+#
+#	print("Append '%s' SaveVariable." % [new_variable.name])
+#	variables.append(new_variable)
+
 
 # loading
-
-func clear_variables() -> void:
-	variables.clear()
 
 
 func load_variables() -> void:
@@ -52,16 +53,17 @@ func load_variables() -> void:
 	var not_in_file : bool = false
 	
 	for variable in variables:
-#		print(variable.variable_name)
-#		if variable.variable_name in _data:
-#			variable.value = _data[variable.variable_name]
+		print(variable.name)
+#		if variable.name in _data:
+#			variable.value = _data[variable.name]
 		if variable.load_variable(_data):
 			not_in_file = true
-#			print("loading '%s' to '%s'." % [variable.variable_name, variable.value])
+#			print("loading '%s' to '%s'." % [variable.name, variable.value])
 	if not_in_file:
+		# save all variables to the file
 		quick_save()
 	
-	loaded.emit()
+	variables_loaded_from_file.emit()
 
 
 func _try_load_data_from_save_file() -> bool:
@@ -76,7 +78,6 @@ func _try_load_data_from_save_file() -> bool:
 	
 	# extract the data in the save file into 'data'
 	self._data = SaveSystem._get_data_from(save_file)
-	
 	
 	return true
 
@@ -130,15 +131,13 @@ static func _filter_files(file_names: PackedStringArray, extension : String, rem
 # saving
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("save"):
+	if event.is_action_pressed("save") and not _disable_saving and not variables.is_empty():
 		print("Saving '%s'." % [_save_file_name])
-		if variables.is_empty():
-			return
 #		var data : Dictionary = {}
 		for variable in variables:
 			variable.save_variable(_data)
-#			data[variable.variable_name] = variable.value
-#			print("saving '%s' as '%s'." % [variable.variable_name, variable.value])
+#			data[variable.name] = variable.value
+#			print("saving '%s' as '%s'." % [variable.name, variable.value])
 		quick_save()
 
 
@@ -149,8 +148,8 @@ func quick_save() -> bool:
 func save(data : Dictionary, merge : bool = true) -> bool:
 	# returns true on a succesful save to file
 	
-	if _disable_saving:
-		return false
+#	if _disable_saving:
+#		return false
 	
 	# check for the save file
 	# return false on any errors
@@ -180,6 +179,7 @@ func save(data : Dictionary, merge : bool = true) -> bool:
 
 func change_save(save_name : String) -> void:
 	_save_file_name = save_name
+	save_changed.emit()
 
 
 func new_save_auto() -> void:
@@ -196,7 +196,6 @@ func set_save(save_name : String)  -> void:
 
 
 func new_save(name_ : String) -> void:
-#	clear_variables()
 	change_save(name_)
 	SaveSystem._create_save_file(_save_file_name)
 	_try_load_data_from_save_file()
