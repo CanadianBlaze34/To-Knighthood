@@ -3,10 +3,13 @@ class_name Village_1 extends Node # AutoLoad
 #var found_Ashleys_cat : String = "" # ["has" | "gave"]
 var ashleys_cat : SaveString # ["has" | "gave"] (String)
 var quests_completed : SaveInt # 0, 1, 2, 3 (int)
-var undead_killed : SaveInt # 0, 1, 2, 3, 4, 5
+var undead_killed : SaveInt # 0, 1, 2, 3, 4, 5 SaveBitField
 var roes_milk : SaveString # ["has" | "gave"]
 var permission_to_leave : bool = false
+var finished_jills_quest : SaveBool
+
 const parents_sword_name : String = "Knights Quest"
+const undead_quantity : int = 5
 
 signal permission_granted_to_leave_town
 signal found_cat
@@ -37,6 +40,8 @@ func _set_save_variables() -> void:
 	roes_milk.init("roes_milk", "")
 	undead_killed = SaveInt.new()
 	undead_killed.init("undead_killed", 0)
+	finished_jills_quest = SaveBool.new()
+	finished_jills_quest.init("finished_jills_quest", false)
 
 
 func _free_save_variables() -> void:
@@ -44,6 +49,7 @@ func _free_save_variables() -> void:
 	quests_completed.delete()
 	undead_killed.delete()
 	roes_milk.delete()
+	finished_jills_quest.delete()
 
 
 func _exit_tree() -> void:
@@ -102,17 +108,28 @@ func spawn_roes_milk() -> bool:
 # Undead ---------------------------------------------------------
 
 func killed_all_undead() -> bool:
-	const undead_quantity : int = 5
-	return undead_killed.value >= undead_quantity
+#	const undead_quantity : int = 5
+#	return undead_killed.value >= undead_quantity
+	var undead_max : int = (Village_1._bitdex(0) + Village_1._bitdex(1) +
+		Village_1._bitdex(2) + Village_1._bitdex(3) + Village_1._bitdex(4))
+	
+	return undead_killed.value == undead_max
 
 func all_undead_are_killed() -> void:
 	_quest_complete()
 
-func killed_undead() -> void:
-	undead_killed.value += 1
+func killed_undead(undead_index : int) -> void:
+	undead_killed.value |= Village_1._bitdex(undead_index)
 
-# -----------------------------------------------------------------
 
+# Jill -------------------------------------------------------------
+
+func has_talked_to_Jill_to_finish_quest() -> bool:
+	return finished_jills_quest.value
+
+func jills_quest_finished() -> void:
+	finished_jills_quest.value = true
+	all_undead_are_killed()
 
 # ----------------------------------------------------------------
 
@@ -131,3 +148,7 @@ func give_parents_sword() -> void:
 	print("Received %s." % [parents_sword_name])
 	gave_parents_sword.emit()
 
+
+static func _bitdex(index : int) -> int: 
+	# converts index to bit index
+	return 1 << index

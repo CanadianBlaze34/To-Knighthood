@@ -19,7 +19,8 @@ gave_ashleys_cat
 
 if Village1.killed_all_undead() == true:
 	Jill: You've killed all the undead. Elders can now pray for their lost ones in peace. Thanks for helping out the town again.
-	set Village1.all_undead_are_killed()
+	if has_talked_to_Jill_to_finish_quest() == false:
+		do Village1.jills_quest_finished()
 else:
 	Jill: The graveyard is over ran with undead. It's no longer safe for elders to visit. Can you get rid of them?
 

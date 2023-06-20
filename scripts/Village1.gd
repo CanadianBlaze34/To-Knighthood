@@ -7,12 +7,6 @@ func _ready() -> void:
 	Village1.permission_granted_to_leave_town.connect(_on_permission_to_leave_town)
 
 
-func _on_monsters_child_exiting_tree(node: Node) -> void:
-	if node is Skeleton:
-		Village1.killed_undead()
-		print("%s died in village1." % [node.name])
-
-
 func _on_permission_to_leave_town() -> void:
 	print("Yello (Town Guard) repositioned.")
 	yellow_town_guard.global_position = Vector2(1624, 2736)

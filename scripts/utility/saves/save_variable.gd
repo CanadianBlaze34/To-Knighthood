@@ -4,7 +4,6 @@ var name : String
 var value : set = set_value
 
 func init(variable_name_ : String, default_value) -> void:
-	TYPE_STRING
 	name = variable_name_
 	set_value(default_value)
 	SaveLoad.variables.append(self)
