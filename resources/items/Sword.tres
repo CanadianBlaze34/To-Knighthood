@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://oael15dgs2iu"]
 
-[ext_resource type="Script" path="res://scripts/resources/item/weapon.gd" id="1_a3ndn"]
+[ext_resource type="Script" path="res://custom_addons/inventory/scripts/data/item_data/weapon.gd" id="1_a3ndn"]
 [ext_resource type="Texture2D" uid="uid://dxvd8slto7hiy" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Weapons/Sword2/Sprite.png" id="2_vkfl0"]
 
 [resource]

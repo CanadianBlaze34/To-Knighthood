@@ -14,6 +14,7 @@ func _ready() -> void:
 #	SaveLoad.variables_loaded_from_file.connect(_on_variables_loaded_from_file)
 	_on_variables_loaded_from_file()
 
+
 # SaveVariable ----------------------------------------------------------------
 
 func _set_save_variables() -> void:

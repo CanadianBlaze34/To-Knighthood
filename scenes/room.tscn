@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://d4im3ysk41bcs" path="res://resources/tile_set/interior.tres" id="1_8woxr"]
 [ext_resource type="Script" path="res://scripts/room.gd" id="2_e5ijb"]
-[ext_resource type="PackedScene" uid="uid://dlt2odp4oycd" path="res://scenes/transition.tscn" id="3_6mkj8"]
+[ext_resource type="PackedScene" uid="uid://dlt2odp4oycd" path="res://scenes/scene_transition.tscn" id="3_6mkj8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e81vg"]
 size = Vector2(16, 14)

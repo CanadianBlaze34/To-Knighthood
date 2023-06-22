@@ -1,4 +1,4 @@
-class_name ItemSlot extends TextureRect
+class_name ItemUI extends TextureRect
 
 var picked : bool = false
 

@@ -19,7 +19,7 @@ config/icon="res://images/To Knighthood screenshot.png"
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Village1="*res://Autoload/village_1.gd"
-SaveLoad="*res://scripts/save_system.gd"
+SaveLoad="*res://scripts/utility/saves/save_system.gd"
 _Quit="*res://scripts/utility/quit.gd"
 
 [dialogue_manager]

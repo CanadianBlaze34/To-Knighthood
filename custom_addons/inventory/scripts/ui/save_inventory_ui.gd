@@ -1,0 +1,228 @@
+# https://www.youtube.com/watch?v=dMYv6InQgno&list=PLcZp9zrMgnmOOQXevC-2CfH67QP3mB4wv&ab_channel=Calame321
+class_name SaveInventoryUI extends NinePatchRect
+
+@export var inventory_size : int = 0 #: set = set_inventory_size
+@export var columns : int = 4 #: set = set_inventory_size
+
+@onready var slot_container: GridContainer = $SlotContainer
+@onready var inventory_slot_res := preload("res://custom_addons/inventory/scenes/inventory_slot.tscn")
+@onready var drop_box: DropBoxUI = $DropBox
+
+signal drop_item(slot_data : InventorySlotData)
+signal equip_item(item: EquipableItem)
+
+
+var slots : Array[InventorySlotUI] = []
+var data : InventoryData
+
+
+func _ready() -> void:
+	slot_container.columns = columns
+	drop_box.hide()
+	hide()
+	ready_inventory(inventory_size)
+	hidden.connect(_on_hidden)
+	mouse_exited.connect(_on_mouse_exited)
+	SaveLoad.variables_loaded_from_file.connect(_load_inventory_from_file)
+
+
+func _load_inventory_from_file() -> void:
+	print("SaveInventoryUI._load_inventory_from_file")
+	return
+	# key used to fetch and save the inventory information
+	const player_inventory : String = "player_inventory"
+	const size_ : String = "size"
+	const items : String = "items"
+	
+	var file_inventory_data : Dictionary = SaveLoad.get_loaded([player_inventory])
+	
+	# save an empty inventory with the current size
+	if file_inventory_data.is_empty():
+		
+		var items_info : Array[Array] = [] # Array[Array[String, int]], Array[Array[item_name, quantity]]
+		items_info.resize(inventory_size)
+		for i in inventory_size:
+			var item_name : String =  ''
+			var quantity : int = 0
+			items_info[i] = [item_name, quantity]
+		
+		var inventory_to_save : Dictionary = {
+			size_ : inventory_size,
+			items : items_info
+		}
+		
+		SaveLoad.save(inventory_to_save, true)
+		
+	else:
+		
+		
+		
+		pass
+
+
+func save_inventory() -> void:
+	# key used to fetch and save the inventory information
+	const player_inventory : String = "player_inventory"
+	const size_ : String = "size"
+	const items : String = "items"
+	
+	var items_info : Array[Array] = [] # Array[Array[String, int]], Array[Array[item_name, quantity]]
+	items_info.resize(inventory_size)
+	for i in inventory_size:
+		var item_name : String =  ''
+		var quantity : int = 0
+		
+		if data.slot_has_item(i):
+			item_name = data.inventory[i].item.name
+			quantity = data.inventory[i].quantity
+		
+		items_info[i] = [item_name, quantity]
+	
+	var inventory_to_save : Dictionary = {
+		size_ : inventory_size,
+		items : items_info
+	}
+	
+	SaveLoad.save(inventory_to_save, true)
+
+
+func _gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("save"):
+		save_inventory()
+
+
+func _on_inventory_slot_gui_input(event : InputEvent, slot_index : int) -> void:
+	if not event is InputEventMouseButton:
+		return 
+	
+	# left mouse button has been pressed
+	if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if data.slot_has_item(slot_index):
+			_create_item_drop_box(slot_index)
+		else:
+			drop_box.hide()
+
+
+func _create_item_drop_box(slot_index : int) -> void:
+	
+	var inventory_slot: InventorySlotUI = slots[slot_index]
+	var inventory_slot_data: InventorySlotData = data.inventory[slot_index]
+	
+	const offset := -Vector2.ONE * 2
+	var new_position := inventory_slot.global_position + inventory_slot.size + offset
+	
+	if new_position != drop_box.global_position or not drop_box.visible:
+		drop_box.global_position = new_position
+		
+		var names_and_functions : Dictionary =\
+			_generate_names_and_functions(inventory_slot_data)
+		
+		drop_box.make_buttons(names_and_functions)
+		
+		# make all the actions into buttons
+		# connect all the buttons to functions or signals
+		# connect the buttons to a signal to hide the drop_box and 
+		# remove all the buttons on press
+		
+		drop_box.show()
+		
+	else:
+		drop_box.visible = not drop_box.visible
+
+
+func _generate_names_and_functions(slot_data : InventorySlotData) -> Dictionary:
+	var names_and_functions : Dictionary = {}
+	
+	
+	if slot_data.item is EquipableItem:
+		if slot_data.item.equiped:
+			names_and_functions["Unequip"] = func():
+				equip_item.emit(slot_data.item as EquipableItem)
+				drop_box.hide()
+		else:
+			names_and_functions["Equip"] = func():
+				equip_item.emit(slot_data.item as EquipableItem)
+				drop_box.hide()
+	
+	
+	names_and_functions["Drop"] = func():
+		drop_item.emit(slot_data)
+		empty_slot(slot_data.item)
+		drop_box.global_position = -Vector2.ONE
+		drop_box.hide()
+	
+	
+	return names_and_functions
+
+
+func ready_inventory(new_size : int) -> void:
+	
+	inventory_size = new_size
+	
+	# resize the inventory dat
+	data = InventoryData.create(inventory_size)
+	data.create_slots()
+	# there is a built in function for this
+	# don't wanna keep looping over the same loop
+	data.inventory = []
+	data.inventory.resize(data.size)
+	
+	
+	# resize the inventory UI
+	const min_size_y : int = 36
+	const additional_row_height : int = 24
+	@warning_ignore("integer_division")
+	var rows : int = inventory_size / (columns + 1)
+	
+	@warning_ignore("integer_division")
+	custom_minimum_size.y = min_size_y + rows * additional_row_height
+	
+	for slot_index in inventory_size:
+		# spawn the slot data
+		data.inventory[slot_index] = InventorySlotData.new()
+		# spawn the UI slots
+		var new_slot : InventorySlotUI = inventory_slot_res.instantiate()
+		slots.append(new_slot)
+		new_slot.gui_input.connect(_on_inventory_slot_gui_input.bind(slot_index))
+		slot_container.add_child(new_slot)
+
+
+func add_item(pickupable_item : PickupableItem) -> void:
+	for slot_index in inventory_size:
+		if not data.inventory[slot_index].item:
+			# add item to slot
+			data.add_item(pickupable_item.item, pickupable_item.quantity, slot_index)
+			slots[slot_index].add_item(pickupable_item.item)
+			return
+
+
+func empty_slot(item : ItemData) -> void:
+#	for slot in slots:
+#		if slot.item:
+#			# remove item in slot
+#			if slot.item.name == item.name:
+#				slot.set_item(null)
+#				return
+	empty_slot_by_name(item.name)
+
+
+func empty_slot_by_name(item_name : String) -> void:
+	for slot_index in inventory_size:
+		if data.slot_has_item(slot_index):
+			# remove item in slot
+			if data.inventory[slot_index].item.name == item_name:
+				data.remove_item(slot_index)
+				slots[slot_index].remove_item()
+				return
+
+
+func _on_mouse_exited() -> void:
+	# this function will also be triggered when entering a child node
+	
+	# mouse has left the control area
+	if not get_rect().has_point(get_global_mouse_position()):
+		drop_box.hide()
+
+
+func _on_hidden() -> void:
+	drop_box.hide()

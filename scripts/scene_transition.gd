@@ -1,4 +1,4 @@
-class_name Transition extends Area2D
+class_name SceneTransition extends Area2D
 
 #@export var scene_parent : Node
 @export var scene : PackedScene

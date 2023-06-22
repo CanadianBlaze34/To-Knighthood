@@ -1,4 +1,4 @@
-extends Area2D
+class_name PlayerDialogueArea extends Area2D
 
 var _npc_dialogue : DialogueAction
 var in_dialogue : bool = false
@@ -7,6 +7,8 @@ signal dialogue_state(state : bool)
 
 func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
 
 
 func _on_dialogue_ended(resource) -> void:

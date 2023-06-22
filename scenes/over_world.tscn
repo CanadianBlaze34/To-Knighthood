@@ -1,27 +1,27 @@
-[gd_scene load_steps=32 format=3 uid="uid://c6mxpi8t4sgng"]
+[gd_scene load_steps=31 format=3 uid="uid://c6mxpi8t4sgng"]
 
-[ext_resource type="PackedScene" uid="uid://054lnswde7g0" path="res://scenes/over_world_tilemap.tscn" id="1_afr1j"]
-[ext_resource type="Script" path="res://scripts/Village1.gd" id="2_3u8a2"]
-[ext_resource type="PackedScene" uid="uid://ds55apat6kv6b" path="res://scenes/npc.tscn" id="3_c0i48"]
-[ext_resource type="Texture2D" uid="uid://dhpw6kew851yv" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/OldWoman/SpriteSheet.png" id="4_w8jxc"]
-[ext_resource type="PackedScene" uid="uid://dh8v12a1kd6r2" path="res://scenes/dialogue_area.tscn" id="5_7atca"]
-[ext_resource type="Resource" uid="uid://kh1c57wq7jrq" path="res://resources/dialogue/village_1.dialogue" id="6_86mhk"]
-[ext_resource type="Texture2D" uid="uid://dws8gp4mybc1p" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Villager3/SpriteSheet.png" id="7_jhk4w"]
-[ext_resource type="Texture2D" uid="uid://uwloavlwilfx" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/OldMan3/SpriteSheet.png" id="8_rpibk"]
-[ext_resource type="Texture2D" uid="uid://ceywgv8sa3ek0" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/OldMan2/SpriteSheet.png" id="9_io8js"]
-[ext_resource type="Script" path="res://scripts/village_1_cat.gd" id="10_dhr75"]
-[ext_resource type="Texture2D" uid="uid://cmk7mynprjt6g" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Animals/Cat/SpriteSheet.png" id="11_pf7gt"]
-[ext_resource type="Texture2D" uid="uid://days6pmichcfu" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Knight/SpriteSheet.png" id="12_2oewl"]
-[ext_resource type="PackedScene" uid="uid://bq54bue2r7uul" path="res://scenes/pickupable_item.tscn" id="13_erk2a"]
-[ext_resource type="Texture2D" uid="uid://ojabqcf5coxs" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Potion/MilkPot.png" id="14_1bmh3"]
-[ext_resource type="Script" path="res://scripts/items/roes_mlik.gd" id="15_7v3oc"]
-[ext_resource type="Resource" uid="uid://di4d585s86k28" path="res://resources/items/roes_milk.tres" id="16_deuq4"]
-[ext_resource type="Texture2D" uid="uid://dxvd8slto7hiy" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Weapons/Sword2/Sprite.png" id="17_cwu8a"]
-[ext_resource type="Resource" uid="uid://oael15dgs2iu" path="res://resources/items/Sword.tres" id="18_0wa1l"]
-[ext_resource type="Script" path="res://scripts/village1_monsters.gd" id="19_qoyni"]
-[ext_resource type="PackedScene" uid="uid://8c5o8vfo37sy" path="res://scenes/skeleton.tscn" id="20_xk0sv"]
-[ext_resource type="PackedScene" uid="uid://dlt2odp4oycd" path="res://scenes/transition.tscn" id="21_0hvo5"]
-[ext_resource type="PackedScene" uid="uid://dlx23fu2unagq" path="res://scenes/player_room.tscn" id="22_v1rn3"]
+[ext_resource type="PackedScene" uid="uid://054lnswde7g0" path="res://scenes/over_world_tilemap.tscn" id="1_1m0gx"]
+[ext_resource type="Script" path="res://scripts/Village1.gd" id="2_kbqfn"]
+[ext_resource type="PackedScene" uid="uid://ds55apat6kv6b" path="res://scenes/npc.tscn" id="3_r0oj6"]
+[ext_resource type="Texture2D" uid="uid://dhpw6kew851yv" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/OldWoman/SpriteSheet.png" id="4_u48hn"]
+[ext_resource type="PackedScene" uid="uid://dh8v12a1kd6r2" path="res://scenes/dialogue_area.tscn" id="5_sq7u8"]
+[ext_resource type="Resource" uid="uid://kh1c57wq7jrq" path="res://resources/dialogue/village_1.dialogue" id="6_j8hqj"]
+[ext_resource type="Texture2D" uid="uid://dws8gp4mybc1p" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Villager3/SpriteSheet.png" id="7_xsbqn"]
+[ext_resource type="Texture2D" uid="uid://uwloavlwilfx" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/OldMan3/SpriteSheet.png" id="8_hvtyl"]
+[ext_resource type="Texture2D" uid="uid://ceywgv8sa3ek0" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/OldMan2/SpriteSheet.png" id="9_umjwb"]
+[ext_resource type="Script" path="res://scripts/village_1_cat.gd" id="10_f0o5w"]
+[ext_resource type="Texture2D" uid="uid://cmk7mynprjt6g" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Animals/Cat/SpriteSheet.png" id="11_dwx1l"]
+[ext_resource type="Texture2D" uid="uid://days6pmichcfu" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Knight/SpriteSheet.png" id="12_bapw5"]
+[ext_resource type="PackedScene" uid="uid://bq54bue2r7uul" path="res://custom_addons/Inventory/scenes/pickupable_item.tscn" id="13_x4iga"]
+[ext_resource type="Texture2D" uid="uid://ojabqcf5coxs" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Potion/MilkPot.png" id="14_xt5q0"]
+[ext_resource type="Script" path="res://scripts/items/roes_mlik.gd" id="15_gs5mp"]
+[ext_resource type="Resource" uid="uid://dcncxch20jbhg" path="res://resources/items/roes_milk.tres" id="16_ulko7"]
+[ext_resource type="Texture2D" uid="uid://dxvd8slto7hiy" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Weapons/Sword2/Sprite.png" id="17_o2uvf"]
+[ext_resource type="Resource" uid="uid://oael15dgs2iu" path="res://resources/items/Sword.tres" id="18_wia6q"]
+[ext_resource type="Script" path="res://scripts/village1_monsters.gd" id="19_xfcgo"]
+[ext_resource type="PackedScene" uid="uid://8c5o8vfo37sy" path="res://scenes/skeleton.tscn" id="20_ae0ji"]
+[ext_resource type="PackedScene" uid="uid://dlt2odp4oycd" path="res://scenes/scene_transition.tscn" id="21_8cmjd"]
+[ext_resource type="PackedScene" uid="uid://dlx23fu2unagq" path="res://scenes/player_room.tscn" id="22_3h2rh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bqob7"]
 radius = 16.0
@@ -42,9 +42,6 @@ height = 22.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71btn"]
 size = Vector2(32, 24)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rrg04"]
-radius = 8.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_bf5yt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2bwyj"]
@@ -53,84 +50,84 @@ size = Vector2(14, 11)
 [node name="OverWorld" type="Node2D" groups=["active_scene"]]
 y_sort_enabled = true
 
-[node name="OverWorldTilemap" parent="." instance=ExtResource("1_afr1j")]
+[node name="OverWorldTilemap" parent="." instance=ExtResource("1_1m0gx")]
 metadata/_edit_lock_ = true
 
 [node name="Village1" type="Node2D" parent="."]
 y_sort_enabled = true
-script = ExtResource("2_3u8a2")
+script = ExtResource("2_kbqfn")
 
 [node name="NPCs" type="Node2D" parent="Village1"]
 y_sort_enabled = true
 
-[node name="Ashley" parent="Village1/NPCs" instance=ExtResource("3_c0i48")]
+[node name="Ashley" parent="Village1/NPCs" instance=ExtResource("3_r0oj6")]
 position = Vector2(1272, 2784)
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" parent="Village1/NPCs/Ashley" index="0"]
-texture = ExtResource("4_w8jxc")
+texture = ExtResource("4_u48hn")
 vframes = 2
 
 [node name="CollisionShape2D" parent="Village1/NPCs/Ashley" index="1"]
 position = Vector2(0.5, 5.5)
 
-[node name="DialogueArea" parent="Village1/NPCs/Ashley" instance=ExtResource("5_7atca")]
-dialogue_resource = ExtResource("6_86mhk")
+[node name="DialogueArea" parent="Village1/NPCs/Ashley" instance=ExtResource("5_sq7u8")]
+dialogue_resource = ExtResource("6_j8hqj")
 dialogue_start = "Ashley"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Village1/NPCs/Ashley/DialogueArea"]
 shape = SubResource("CircleShape2D_bqob7")
 
-[node name="Jill" parent="Village1/NPCs" instance=ExtResource("3_c0i48")]
+[node name="Jill" parent="Village1/NPCs" instance=ExtResource("3_r0oj6")]
 position = Vector2(1800, 2776)
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" parent="Village1/NPCs/Jill" index="0"]
-texture = ExtResource("7_jhk4w")
+texture = ExtResource("7_xsbqn")
 
-[node name="DialogueArea" parent="Village1/NPCs/Jill" instance=ExtResource("5_7atca")]
-dialogue_resource = ExtResource("6_86mhk")
+[node name="DialogueArea" parent="Village1/NPCs/Jill" instance=ExtResource("5_sq7u8")]
+dialogue_resource = ExtResource("6_j8hqj")
 dialogue_start = "Jill"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Village1/NPCs/Jill/DialogueArea"]
 shape = SubResource("CircleShape2D_n8cua")
 
-[node name="Chief Dave" parent="Village1/NPCs" instance=ExtResource("3_c0i48")]
+[node name="Chief Dave" parent="Village1/NPCs" instance=ExtResource("3_r0oj6")]
 position = Vector2(1488, 3008)
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" parent="Village1/NPCs/Chief Dave" index="0"]
-texture = ExtResource("8_rpibk")
+texture = ExtResource("8_hvtyl")
 
-[node name="DialogueArea" parent="Village1/NPCs/Chief Dave" instance=ExtResource("5_7atca")]
-dialogue_resource = ExtResource("6_86mhk")
+[node name="DialogueArea" parent="Village1/NPCs/Chief Dave" instance=ExtResource("5_sq7u8")]
+dialogue_resource = ExtResource("6_j8hqj")
 dialogue_start = "Chief_Dave"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Village1/NPCs/Chief Dave/DialogueArea"]
 shape = SubResource("CircleShape2D_gbje6")
 
-[node name="Roe" parent="Village1/NPCs" instance=ExtResource("3_c0i48")]
+[node name="Roe" parent="Village1/NPCs" instance=ExtResource("3_r0oj6")]
 position = Vector2(1424, 2856)
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" parent="Village1/NPCs/Roe" index="0"]
-texture = ExtResource("9_io8js")
+texture = ExtResource("9_umjwb")
 
-[node name="DialogueArea" parent="Village1/NPCs/Roe" instance=ExtResource("5_7atca")]
-dialogue_resource = ExtResource("6_86mhk")
+[node name="DialogueArea" parent="Village1/NPCs/Roe" instance=ExtResource("5_sq7u8")]
+dialogue_resource = ExtResource("6_j8hqj")
 dialogue_start = "Roe"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Village1/NPCs/Roe/DialogueArea"]
 shape = SubResource("CircleShape2D_fuxvj")
 
-[node name="Cat" parent="Village1/NPCs" instance=ExtResource("3_c0i48")]
+[node name="Cat" parent="Village1/NPCs" instance=ExtResource("3_r0oj6")]
 position = Vector2(1512, 3080)
-script = ExtResource("10_dhr75")
+script = ExtResource("10_f0o5w")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" parent="Village1/NPCs/Cat" index="0"]
 position = Vector2(0, -8)
-texture = ExtResource("11_pf7gt")
+texture = ExtResource("11_dwx1l")
 hframes = 2
 vframes = 1
 metadata/_edit_lock_ = true
@@ -138,9 +135,9 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" parent="Village1/NPCs/Cat" index="1"]
 shape = null
 
-[node name="DialogueArea" parent="Village1/NPCs/Cat" instance=ExtResource("5_7atca")]
+[node name="DialogueArea" parent="Village1/NPCs/Cat" instance=ExtResource("5_sq7u8")]
 position = Vector2(0, -8)
-dialogue_resource = ExtResource("6_86mhk")
+dialogue_resource = ExtResource("6_j8hqj")
 dialogue_start = "cat"
 metadata/_edit_lock_ = true
 
@@ -149,15 +146,15 @@ position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_w678l")
 metadata/_edit_lock_ = true
 
-[node name="Yellow (Town Guard)" parent="Village1/NPCs" instance=ExtResource("3_c0i48")]
+[node name="Yellow (Town Guard)" parent="Village1/NPCs" instance=ExtResource("3_r0oj6")]
 position = Vector2(1608, 2728)
 
 [node name="Sprite2D" parent="Village1/NPCs/Yellow (Town Guard)" index="0"]
-texture = ExtResource("12_2oewl")
+texture = ExtResource("12_bapw5")
 metadata/_edit_lock_ = true
 
-[node name="DialogueArea" parent="Village1/NPCs/Yellow (Town Guard)" instance=ExtResource("5_7atca")]
-dialogue_resource = ExtResource("6_86mhk")
+[node name="DialogueArea" parent="Village1/NPCs/Yellow (Town Guard)" instance=ExtResource("5_sq7u8")]
+dialogue_resource = ExtResource("6_j8hqj")
 dialogue_start = "Yellow_Town_Guard"
 start_automatic = true
 metadata/_edit_lock_ = true
@@ -169,24 +166,20 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node2D" parent="Village1"]
 
-[node name="Roes Milk" parent="Village1/Items" instance=ExtResource("13_erk2a")]
+[node name="Roes Milk" parent="Village1/Items" instance=ExtResource("13_x4iga")]
 position = Vector2(1438, 2816)
-texture = ExtResource("14_1bmh3")
-script = ExtResource("15_7v3oc")
-item = ExtResource("16_deuq4")
+texture = ExtResource("14_xt5q0")
+script = ExtResource("15_gs5mp")
+item = ExtResource("16_ulko7")
 
 [node name="Area2D" parent="Village1/Items/Roes Milk" index="0"]
 metadata/_edit_lock_ = true
 
-[node name="@CollisionShape2D@56764" type="CollisionShape2D" parent="Village1/Items/Roes Milk/Area2D" index="0"]
-shape = SubResource("CircleShape2D_rrg04")
-metadata/_edit_lock_ = true
-
-[node name="Sword" parent="Village1/Items" instance=ExtResource("13_erk2a")]
+[node name="Sword" parent="Village1/Items" instance=ExtResource("13_x4iga")]
 position = Vector2(2008, 2808)
 rotation = 0.588909
-texture = ExtResource("17_cwu8a")
-item = ExtResource("18_0wa1l")
+texture = ExtResource("17_o2uvf")
+item = ExtResource("18_wia6q")
 
 [node name="Area2D" parent="Village1/Items/Sword" index="0"]
 metadata/_edit_lock_ = true
@@ -197,28 +190,28 @@ metadata/_edit_lock_ = true
 
 [node name="Monsters" type="Node2D" parent="Village1"]
 y_sort_enabled = true
-script = ExtResource("19_qoyni")
+script = ExtResource("19_xfcgo")
 
-[node name="Skeleton1" parent="Village1/Monsters" instance=ExtResource("20_xk0sv")]
+[node name="Skeleton1" parent="Village1/Monsters" instance=ExtResource("20_ae0ji")]
 position = Vector2(2160, 2822)
 
-[node name="Skeleton2" parent="Village1/Monsters" instance=ExtResource("20_xk0sv")]
+[node name="Skeleton2" parent="Village1/Monsters" instance=ExtResource("20_ae0ji")]
 position = Vector2(2120, 2784)
 
-[node name="Skeleton3" parent="Village1/Monsters" instance=ExtResource("20_xk0sv")]
+[node name="Skeleton3" parent="Village1/Monsters" instance=ExtResource("20_ae0ji")]
 position = Vector2(2120, 2896)
 
-[node name="Skeleton4" parent="Village1/Monsters" instance=ExtResource("20_xk0sv")]
+[node name="Skeleton4" parent="Village1/Monsters" instance=ExtResource("20_ae0ji")]
 position = Vector2(2096, 2961)
 
-[node name="Skeleton5" parent="Village1/Monsters" instance=ExtResource("20_xk0sv")]
+[node name="Skeleton5" parent="Village1/Monsters" instance=ExtResource("20_ae0ji")]
 position = Vector2(2152, 2960)
 
 [node name="Transitions" type="Node2D" parent="Village1"]
 
-[node name="PlayerHouseTransition" parent="Village1/Transitions" node_paths=PackedStringArray("replace") instance=ExtResource("21_0hvo5")]
+[node name="PlayerHouseTransition" parent="Village1/Transitions" node_paths=PackedStringArray("replace") instance=ExtResource("21_8cmjd")]
 position = Vector2(1256, 2841)
-scene = ExtResource("22_v1rn3")
+scene = ExtResource("22_3h2rh")
 replace = NodePath("../../..")
 spawn_position = Vector2(40, 75)
 

@@ -1,8 +1,13 @@
-extends Area2D
+class_name PickupableItemArea extends Area2D
 
 var items_to_pickup : Array[PickupableItem]
 
 signal item_pickup(pickupable_item : PickupableItem)
+
+func _ready() -> void:
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pickup_item"):

@@ -1,7 +1,5 @@
 class_name RoesMilk extends PickupableItem
 
 func _init() -> void:
-	if Village1.spawn_roes_milk():
-		print("spawn roes milk")
-	else:
+	if not Village1.spawn_roes_milk():
 		queue_free()

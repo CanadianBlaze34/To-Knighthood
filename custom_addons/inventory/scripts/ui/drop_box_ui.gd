@@ -1,4 +1,4 @@
-class_name DropBox extends NinePatchRect
+class_name DropBoxUI extends NinePatchRect
 
 @onready var v_box_container: VBoxContainer = $VBoxContainer
 @onready var button_theme := preload("res://resources/inventory/button_theme.tres")
