@@ -15,6 +15,7 @@ class_name Village1Monsters extends Node2D
 func _ready() -> void:
 	# this scene is added after the file has been loaded
 	_remove_loaded_undead()
+	EntityAutoload.death.connect(_on_entity_death)
 
 
 func _remove_loaded_undead() -> void:
@@ -31,14 +32,12 @@ func _remove_loaded_undead() -> void:
 		
 		for i in Village1.undead_quantity:
 			# the bit has been set, unspawn the undead
-			if Village1.undead_killed.value & Village1._bitdex(i):
+			if Village1.undead_killed.value & Village_1._bitdex(i):
 				print("skeleton%d removed with bit %d." % [i + 1, Village_1._bitdex(i)])
 				undead[i].queue_free()
-		
-		child_exiting_tree.connect(_on_child_exiting_tree)
 
 
-func _on_child_exiting_tree(node: Node) -> void:
+func _on_entity_death(node: Entity) -> void:
 	if node is Skeleton:
 		
 		var undead_to_remove := node as Skeleton
@@ -52,12 +51,11 @@ func _on_child_exiting_tree(node: Node) -> void:
 				undead[i].queue_free()
 				Village1.killed_undead(i)
 				print("'undead_killed' value: %d." % [Village1.undead_killed.value])
-				print("skeleton%d removed with bit %d." % [i + 1, Village1._bitdex(i)])
+				print("skeleton%d removed with bit %d." % [i + 1, Village_1._bitdex(i)])
 				break
 		
 		print("%s died in village1." % [node.name])
 		
 		if Village1.killed_all_undead():
-			child_exiting_tree.disconnect(_on_child_exiting_tree)
 			undead.clear()
 

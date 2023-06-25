@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bq54bue2r7uul"]
 
-[ext_resource type="Script" path="res://custom_addons/inventory/scripts/pickupable_item.gd" id="1_i1ch5"]
+[ext_resource type="Script" path="res://custom_addons/inventory/scripts/pickupable_item.gd" id="1_2jc03"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lcf4q"]
 
 [node name="PickupableItem" type="Sprite2D"]
-script = ExtResource("1_i1ch5")
+script = ExtResource("1_2jc03")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32

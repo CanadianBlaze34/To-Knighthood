@@ -10,18 +10,21 @@ var finished_jills_quest : SaveBool
 
 const parents_sword_name : String = "Knights Quest"
 const undead_quantity : int = 5
+const roes_milk_item_id : int = 1
 
 signal permission_granted_to_leave_town
 signal found_cat
-signal has_item(item_name : String)
-signal gave_item(item_name : String)
+signal has_item(item_id : int)
+signal dropped_item(item_id : int)
+signal gave_item(item_id : int)
 signal gave_parents_sword
 
 
 
 func _ready() -> void:
 	SaveLoad.save_changed.connect(_set_save_variables)
-	has_item.connect(_check_item)
+	has_item.connect(_has_item)
+	dropped_item.connect(_dropped_item)
 
 # SaveVariable ----------------------------------------------------------------
 
@@ -91,7 +94,8 @@ func give_roes_milk() -> void:
 	roes_milk.value = "gave"
 	_quest_complete()
 	# player removes roes_milk from inventory
-	gave_item.emit("Roes Milk")
+#	gave_item.emit("Roes Milk")
+	gave_item.emit(roes_milk_item_id)
 
 func found_roes_milk() -> void:
 	roes_milk.value = "has"
@@ -102,8 +106,8 @@ func is_roes_milk_found() -> bool:
 func gave_roes_milk() -> bool:
 	return roes_milk.value == "gave"
 
-func spawn_roes_milk() -> bool:
-	return roes_milk.value == ""
+func dropped_roes_milk() -> void:
+	roes_milk.value = ""
 
 # Undead ---------------------------------------------------------
 
@@ -133,10 +137,18 @@ func jills_quest_finished() -> void:
 
 # ----------------------------------------------------------------
 
-func _check_item(item_name : String) -> void:
-	match item_name:
-		"Roes Milk":
+func _has_item(item_id : int) -> void:
+	match item_id:
+#		"Roes Milk":
+		roes_milk_item_id:
 			found_roes_milk()
+
+
+func _dropped_item(item_id : int) -> void:
+	match item_id:
+#		"Roes Milk":
+		roes_milk_item_id:
+			dropped_roes_milk()
 
 
 func permission_to_leave_town() -> void:

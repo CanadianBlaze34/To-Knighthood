@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://oael15dgs2iu"]
 
-[ext_resource type="Script" path="res://custom_addons/inventory/scripts/data/item_data/weapon.gd" id="1_a3ndn"]
-[ext_resource type="Texture2D" uid="uid://dxvd8slto7hiy" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Weapons/Sword2/Sprite.png" id="2_vkfl0"]
+[ext_resource type="Script" path="res://custom_addons/inventory/scripts/data/item_data/weapon.gd" id="1_g8egj"]
+[ext_resource type="Texture2D" uid="uid://dxvd8slto7hiy" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Weapons/Sword2/Sprite.png" id="2_22sfy"]
 
 [resource]
-script = ExtResource("1_a3ndn")
+script = ExtResource("1_g8egj")
 damage = 4.0
 name = "Sword"
-texture = ExtResource("2_vkfl0")
+texture = ExtResource("2_22sfy")
+stack_limit = 0
+id = 0

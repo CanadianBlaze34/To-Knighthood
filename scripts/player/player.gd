@@ -11,8 +11,6 @@ class_name Player extends CharacterBody2D
 @onready var inventory: PlayerInventory = $UI/PlayerInventory
 @onready var pickupable_item_area: PickupableItemArea = $PickupableItemArea
 
-@onready var _pickupable_item_res := preload("res://custom_addons/inventory/scenes/pickupable_item.tscn")
-
 var attacking : bool = true
 var save_global_position : SaveVector2
 
@@ -71,7 +69,7 @@ func _connect_signals() -> void:
 	
 	# remove any items from the inventory when given to an npc
 	# through Dialogue Manager
-	Village1.gave_item.connect(inventory.empty_slot_by_name)
+	Village1.gave_item.connect(inventory.empty_slot_by_id)
 	
 	inventory.equip_item.connect(_on_inventory_equip_item)
 	inventory.drop_item.connect(_on_inventory_drop_item)
@@ -161,14 +159,14 @@ func _inventory_input(event: InputEvent) -> void:
 
 
 func _on_inventory_drop_item(slot_data : InventorySlotData) -> void:
-	var pickupable : PickupableItem = _pickupable_item_res.instantiate()
-	var item : ItemData = slot_data.item
-	pickupable.position = global_position
-	pickupable.item = item
-	pickupable.quantity = slot_data.quantity
+	var pickupable := DroppedPickupableItem.generate_item(slot_data.item_id, slot_data.quantity, global_position)
 	get_parent().add_child(pickupable)
 	
+	var item : ItemData = slot_data.get_item()
+	
 	print("dropped %s." % [item.name])
+	
+	Village1.dropped_item.emit(slot_data.item_id)
 	
 	# unequipe equiped items
 	if weapon and item is EquipableItem and weapon == item:

@@ -1,1 +1,1 @@
-class_name Skeleton extends Node2D
+class_name Skeleton extends Entity

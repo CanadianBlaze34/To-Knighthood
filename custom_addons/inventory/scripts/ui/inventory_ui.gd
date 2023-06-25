@@ -66,21 +66,22 @@ func _create_item_drop_box(slot_index : int) -> void:
 func _generate_names_and_functions(slot_data : InventorySlotData) -> Dictionary:
 	var names_and_functions : Dictionary = {}
 	
+	var slot_data_item : ItemData = slot_data.get_item()
 	
-	if slot_data.item is EquipableItem:
-		if slot_data.item.equiped:
+	if slot_data_item is EquipableItem:
+		if slot_data_item.equiped:
 			names_and_functions["Unequip"] = func():
-				equip_item.emit(slot_data.item as EquipableItem)
+				equip_item.emit(slot_data_item as EquipableItem)
 				drop_box.hide()
 		else:
 			names_and_functions["Equip"] = func():
-				equip_item.emit(slot_data.item as EquipableItem)
+				equip_item.emit(slot_data_item as EquipableItem)
 				drop_box.hide()
 	
 	
 	names_and_functions["Drop"] = func():
 		drop_item.emit(slot_data)
-		empty_slot(slot_data.item)
+		empty_slot(slot_data_item)
 		drop_box.global_position = -Vector2.ONE
 		drop_box.hide()
 	
@@ -120,11 +121,34 @@ func ready_inventory(new_size : int) -> void:
 		slot_container.add_child(new_slot)
 
 
+func add_slots(quantity : int) -> void:
+	data.inventory.resize(inventory_size + quantity)
+	for i in quantity:
+		var slot_index : int = i + inventory_size
+		# spawn the slot data
+		data.inventory[slot_index] = InventorySlotData.new()
+		# spawn the UI slots
+		var new_slot : InventorySlotUI = inventory_slot_res.instantiate()
+		slots.append(new_slot)
+		new_slot.gui_input.connect(_on_inventory_slot_gui_input.bind(slot_index))
+		slot_container.add_child(new_slot)
+	inventory_size += quantity
+
+func remove_slots(quantity : int) -> void:
+	for i in quantity:
+		var slot_index : int = inventory_size - 1 - i
+		slot_container.remove_child(slots[slot_index])
+		data.inventory[slot_index] = null
+	
+	data.inventory.resize(inventory_size - quantity)
+	inventory_size -= quantity
+
+
 func add_item(pickupable_item : PickupableItem) -> void:
 	for slot_index in inventory_size:
-		if not data.inventory[slot_index].item:
+		if not data.slot_has_item(slot_index):
 			# add item to slot
-			data.add_item(pickupable_item.item, pickupable_item.quantity, slot_index)
+			data.add_item(pickupable_item.item.id, pickupable_item.quantity, slot_index)
 			slots[slot_index].add_item(pickupable_item.item)
 			return
 
@@ -136,18 +160,27 @@ func empty_slot(item : ItemData) -> void:
 #			if slot.item.name == item.name:
 #				slot.set_item(null)
 #				return
-	empty_slot_by_name(item.name)
+	empty_slot_by_id(item.id)
 
 
 func empty_slot_by_name(item_name : String) -> void:
 	for slot_index in inventory_size:
 		if data.slot_has_item(slot_index):
 			# remove item in slot
-			if data.inventory[slot_index].item.name == item_name:
+			if data.slot_item(slot_index).name == item_name:
 				data.remove_item(slot_index)
 				slots[slot_index].remove_item()
 				return
 
+
+func empty_slot_by_id(item_id : int) -> void:
+	for slot_index in inventory_size:
+		if data.slot_has_item(slot_index):
+			# remove item in slot
+			if data.slot_item_id(slot_index) == item_id:
+				data.remove_item(slot_index)
+				slots[slot_index].remove_item()
+				return
 
 func _on_mouse_exited() -> void:
 	# this function will also be triggered when entering a child node

@@ -4,9 +4,9 @@ class_name InventoryData extends Object
 var size : int
 var inventory : Array[InventorySlotData]
 
-static func create(size : int) -> InventoryData:
+static func create(size_ : int) -> InventoryData:
 	var inventory_data := InventoryData.new()
-	inventory_data.size = size
+	inventory_data.size = size_
 	return inventory_data
 
 
@@ -17,15 +17,15 @@ func create_slots() -> void:
 		inventory[i] = InventorySlotData.new()
 
 
-func add_item_to_open_slot(item : ItemData, quantity : int) -> void:
+func add_item_to_open_slot(item_id : int, quantity : int) -> void:
 	for i in size:
 		if not inventory[i].has_item():
-			add_item(item,  quantity, i)
+			add_item(item_id,  quantity, i)
 			break
 
 
-func add_item(item : ItemData, quantity : int, index : int) -> void:
-	inventory[index].add_item(item, quantity)
+func add_item(item_id : int, quantity : int, index : int) -> void:
+	inventory[index].add_item(item_id, quantity)
 
 
 func remove_item(index : int) -> void:
@@ -42,3 +42,10 @@ func slot_has_item(index : int) -> bool:
 
 func slot_quantity(index : int) -> int:
 	return inventory[index].quantity
+
+
+func slot_item(index : int) -> ItemData:
+	return inventory[index].get_item()
+
+func slot_item_id(index : int) -> int:
+	return inventory[index].item_id

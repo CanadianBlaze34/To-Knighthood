@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bbwlqef08rqh3"]
 
-[ext_resource type="Texture2D" uid="uid://cujkliypcwsp" path="res://assets/NinjaAdventure(SupporterEdition)/HUD/NinePathRect/DialogueBubble.png" id="1_q2f6a"]
-[ext_resource type="Script" path="res://custom_addons/inventory/scripts/ui/inventory_ui.gd" id="2_yo3gj"]
-[ext_resource type="PackedScene" uid="uid://l1bom2ftyko" path="res://custom_addons/inventory/scenes/drop_box.tscn" id="3_g1ieo"]
+[ext_resource type="Texture2D" uid="uid://cujkliypcwsp" path="res://assets/NinjaAdventure(SupporterEdition)/HUD/NinePathRect/DialogueBubble.png" id="1_rh3cd"]
+[ext_resource type="Script" path="res://custom_addons/inventory/scripts/ui/inventory_ui.gd" id="2_vkxdr"]
+[ext_resource type="PackedScene" uid="uid://l1bom2ftyko" path="res://custom_addons/inventory/scenes/drop_box.tscn" id="3_mmjpc"]
 
 [node name="InventoryUI" type="NinePatchRect"]
 custom_minimum_size = Vector2(0, 36)
@@ -14,12 +14,12 @@ offset_right = 56.0
 offset_bottom = 36.0
 grow_horizontal = 2
 mouse_filter = 1
-texture = ExtResource("1_q2f6a")
+texture = ExtResource("1_rh3cd")
 patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
-script = ExtResource("2_yo3gj")
+script = ExtResource("2_vkxdr")
 
 [node name="SlotContainer" type="GridContainer" parent="."]
 layout_mode = 1
@@ -34,7 +34,7 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 4
 
-[node name="DropBox" parent="." instance=ExtResource("3_g1ieo")]
+[node name="DropBox" parent="." instance=ExtResource("3_mmjpc")]
 layout_mode = 0
 offset_left = 138.0
 offset_top = 19.0

@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dcncxch20jbhg"]
 
-[ext_resource type="Script" path="res://custom_addons/inventory/scripts/data/item_data.gd" id="1_aeiqt"]
-[ext_resource type="Texture2D" uid="uid://ojabqcf5coxs" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Potion/MilkPot.png" id="2_qyirc"]
+[ext_resource type="Script" path="res://custom_addons/inventory/scripts/data/item_data.gd" id="1_1xiym"]
+[ext_resource type="Texture2D" uid="uid://ojabqcf5coxs" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Potion/MilkPot.png" id="2_6bnmp"]
 
 [resource]
-script = ExtResource("1_aeiqt")
+script = ExtResource("1_1xiym")
 name = "Roes Milk"
-texture = ExtResource("2_qyirc")
+texture = ExtResource("2_6bnmp")
 stack_limit = 1
+id = 1
