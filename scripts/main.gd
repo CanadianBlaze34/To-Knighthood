@@ -27,8 +27,11 @@ func _on_variables_loaded_from_file() -> void:
 	# if it isn't loaded from the file, the default scene will be saved to the file
 	# and the default scene will be loaded
 	var loaded_scene : Node = load(active_scene.value).instantiate()
+	PickupableItemTrackerAutoload.set_scene(loaded_scene)
+	
 	call_deferred("add_child", loaded_scene)
 	print("Main._ready() loading '%s' scene." % [active_scene.value])
+	
 	loaded_scene.ready.connect(PickupableItemTrackerAutoload.on_scene_ready.bind(loaded_scene))
 
 
@@ -58,6 +61,7 @@ func _on_child_entered_tree(node: Node) -> void:
 	# will set when initializing main node
 	if node.is_in_group("active_scene") and node.get_scene_file_path() != active_scene.value:
 		active_scene.value = node.get_scene_file_path()
+		PickupableItemTrackerAutoload.set_scene(node)
 		node.ready.connect(PickupableItemTrackerAutoload.on_scene_ready.bind(node))
 
 

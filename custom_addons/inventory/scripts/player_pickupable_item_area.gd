@@ -23,6 +23,7 @@ func _pickup_item() -> void:
 	print("picked up %s." % [pickupable_item.item.name])
 	Village1.has_item.emit(pickupable_item.item.id)
 	item_pickup.emit(pickupable_item)
+	pickupable_item.pickedup()
 	pickupable_item.queue_free()
 	# doesn't need to be removed beacuse '_on_pickupable_item_area_exited' will
 	# remove the PickupableItem while it is being freed

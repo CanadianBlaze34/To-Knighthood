@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://cf0kbu86ly2fs"]
+
+[ext_resource type="Script" path="res://custom_addons/inventory/scripts/data/item_data/weapon.gd" id="1_o730d"]
+[ext_resource type="Texture2D" uid="uid://b1ojcrrk832tg" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Weapons/Sword/Sprite.png" id="2_m8uxi"]
+
+[resource]
+script = ExtResource("1_o730d")
+damage = 4.0
+name = "Parents Sword"
+texture = ExtResource("2_m8uxi")
+stack_limit = 1
+id = 2

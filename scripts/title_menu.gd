@@ -57,7 +57,8 @@ func _make_load_button(save_name: String) -> Button:
 	button.theme = button_theme
 	button.name = save_name
 	button.text = save_name
-	button.button_mask = MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_RIGHT
+	@warning_ignore("int_as_enum_without_cast", "int_as_enum_without_match")
+	button.set_button_mask(MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_RIGHT)
 	
 	button.gui_input.connect(
 		func (event : InputEvent):

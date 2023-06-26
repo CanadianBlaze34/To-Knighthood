@@ -1,12 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://bghvtati0dphu"]
+[gd_scene load_steps=18 format=3 uid="uid://bghvtati0dphu"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_5yjgf"]
-[ext_resource type="Texture2D" uid="uid://brxqvoxw8tnyr" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Boy/SeparateAnim/Walk.png" id="2_d10bn"]
-[ext_resource type="Script" path="res://scripts/player/player_dialogic_area.gd" id="3_a7bb0"]
-[ext_resource type="PackedScene" uid="uid://bdcoxajy4bkl7" path="res://custom_addons/inventory/scenes/player_inventory.tscn" id="4_pmspx"]
-[ext_resource type="Script" path="res://custom_addons/inventory/scripts/player_pickupable_item_area.gd" id="5_3h2ui"]
-[ext_resource type="PackedScene" uid="uid://bywnmmwprecpq" path="res://scenes/attack_box.tscn" id="6_myc03"]
-[ext_resource type="Script" path="res://scripts/movement.gd" id="7_0mnvx"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_btr83"]
+[ext_resource type="Texture2D" uid="uid://brxqvoxw8tnyr" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Boy/SeparateAnim/Walk.png" id="2_x1uhx"]
+[ext_resource type="Script" path="res://scripts/player/player_dialogic_area.gd" id="3_smpu0"]
+[ext_resource type="PackedScene" uid="uid://bdcoxajy4bkl7" path="res://custom_addons/inventory/scenes/player_inventory.tscn" id="4_hv1qa"]
+[ext_resource type="Script" path="res://custom_addons/inventory/scripts/player_pickupable_item_area.gd" id="5_cxe2f"]
+[ext_resource type="PackedScene" uid="uid://bywnmmwprecpq" path="res://scenes/attack_box.tscn" id="6_dui18"]
+[ext_resource type="Script" path="res://scripts/movement.gd" id="7_47mx7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fc5dt"]
 radius = 17.0294
@@ -133,6 +133,8 @@ _data = {
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pbeg1"]
 
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_yfhu1"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u2t0k"]
 size = Vector2(25, 25)
 
@@ -143,10 +145,10 @@ size = Vector2(10, 5)
 y_sort_enabled = true
 collision_layer = 257
 motion_mode = 1
-script = ExtResource("1_5yjgf")
+script = ExtResource("1_btr83")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_d10bn")
+texture = ExtResource("2_x1uhx")
 offset = Vector2(0, -3)
 hframes = 4
 vframes = 4
@@ -155,14 +157,14 @@ vframes = 4
 position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 16
-script = ExtResource("3_a7bb0")
+script = ExtResource("3_smpu0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogicArea"]
 shape = SubResource("CircleShape2D_fc5dt")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="PlayerInventory" parent="UI" node_paths=PackedStringArray("player") instance=ExtResource("4_pmspx")]
+[node name="PlayerInventory" parent="UI" node_paths=PackedStringArray("player") instance=ExtResource("4_hv1qa")]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -177,7 +179,7 @@ player = NodePath("../..")
 position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 32
-script = ExtResource("5_3h2ui")
+script = ExtResource("5_cxe2f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupableItemArea"]
 shape = SubResource("CircleShape2D_xc3v7")
@@ -190,18 +192,19 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_pbeg1")
 anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_yfhu1")
 
 [node name="EquipableWeapon" type="Sprite2D" parent="."]
 position = Vector2(-6, 0)
 
-[node name="AttackBox" parent="." instance=ExtResource("6_myc03")]
+[node name="AttackBox" parent="." instance=ExtResource("6_dui18")]
 
 [node name="CollisionShape2D" parent="AttackBox" index="0"]
 position = Vector2(12.5, 0)
 shape = SubResource("RectangleShape2D_u2t0k")
 
 [node name="movement" type="Node" parent="." node_paths=PackedStringArray("character")]
-script = ExtResource("7_0mnvx")
+script = ExtResource("7_47mx7")
 speed = 150.0
 character = NodePath("..")
 

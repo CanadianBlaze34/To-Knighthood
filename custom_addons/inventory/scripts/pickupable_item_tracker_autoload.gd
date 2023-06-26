@@ -71,7 +71,7 @@ signal editor_PickupableItem_spawned(pickupable_item) # : PickupableItem
 
 
 func _ready() -> void:
-	return
+#	return
 	_connect_signals()
 
 
@@ -83,14 +83,20 @@ func _on_variables_loaded_from_file() -> void:
 		print("PickupableItemTrackerAutoload: loaded. ", _saved_items)
 	else:
 		print("PickupableItemTrackerAutoload: Nothing to load.")
+		_saved_items = {}
 
 
 func _input(event: InputEvent) -> void:
-	return
+#	return
 	if event.is_action_pressed("save"):
 		var saved_items : Dictionary = { saved_items_key : _saved_items}
 		SaveLoad.save(saved_items, true)
 		print("PickupableItemTrackerAutoload: Saving. ", _saved_items)
+
+
+func set_scene(new_scene : Node) -> void:
+	active_scene = new_scene
+	active_scene_path = active_scene.get_scene_file_path()
 
 
 func on_scene_ready(new_scene : Node) -> void:
@@ -99,8 +105,7 @@ func on_scene_ready(new_scene : Node) -> void:
 	# if there are items in the new scene, load the items at their location
 	# if not, return and do nothing
 	# do not save
-	active_scene = new_scene
-	active_scene_path = active_scene.get_scene_file_path()
+#	set_scene(new_scene)
 	print("PickupableItemTrackerAutoload: active_scene = '%s'." % [active_scene_path])
 	_spawn_dropped_items()
 
@@ -111,15 +116,17 @@ func _spawn_dropped_items() -> void:
 		print("PickupableItemTrackerAutoload: No 'dropped_items' to spawn in '%s'." % [active_scene_path])
 		return
 	
-	for item_id in _saved_items[active_scene_path][dropped_item_key]:
+	for item_id in _saved_items[active_scene_path][dropped_item_key].duplicate():
 		
-		var item_slots : Array = _scene_items_of(item_id, true)
+		var item_slots : Array = _scene_items_of(int(item_id), true)
 		
 		for item_slot in item_slots:
-			var item_position : Vector2 = item_slot[position_index] as Vector2
+			var item_position : Vector2 = (
+				item_slot[position_index] if item_slot[position_index] is Vector2
+				else str_to_var("Vector2" + item_slot[position_index])
+			)
 			var item_quantity : int = item_slot[quantity_index] as int
-			
-			var pickupable_item := DroppedPickupableItem.generate_item(item_id, item_quantity, item_position)
+			var pickupable_item := DroppedPickupableItem.generate_item(int(item_id), item_quantity, item_position)
 			
 			active_scene.add_child(pickupable_item)
 			print("PickupableItemTrackerAutoload: Spawning '%d' '%s'(s) at '%v' to '%s'." % [item_quantity, pickupable_item.item.name, item_position, active_scene.name])
@@ -161,14 +168,14 @@ func _make_saved_item(pickable_item_id : int, is_dropped_item : bool) -> void:
 		_saved_items[active_scene_path][item_type_key] = {}
 	
 	if not _saved_items[active_scene_path][item_type_key].has(str(pickable_item_id)):
-		print("PickupableItemTrackerAutoload: making '%d'('%s') in _saved_items[%s][%s]." % [pickable_item_id, PreloadItemsAutoload_.get_item(pickable_item_id).name, active_scene_path, item_type_key])
+		print("PickupableItemTrackerAutoload: making '%d'('%s') in _saved_items[%s][%s]." % [pickable_item_id, PreloadItemsAutoload.get_item(pickable_item_id).name, active_scene_path, item_type_key])
 		_saved_items[active_scene_path][item_type_key][str(pickable_item_id)] = []
 
 
 func _clear_saved_dropped_items(pickable_item_id : int) -> void:
 	
 	if _saved_items[active_scene_path][dropped_item_key][str(pickable_item_id)].is_empty():
-		print("PickupableItemTrackerAutoload: removing '%d'('%s') from _saved_items[%s][%s]. Is empty" % [pickable_item_id, PreloadItemsAutoload_.get_item(pickable_item_id).name, active_scene_path, dropped_item_key])
+		print("PickupableItemTrackerAutoload: removing '%d'('%s') from _saved_items[%s][%s]. Is empty" % [pickable_item_id, PreloadItemsAutoload.get_item(pickable_item_id).name, active_scene_path, dropped_item_key])
 		_saved_items[active_scene_path][dropped_item_key].erase(pickable_item_id)
 	
 	if _saved_items[active_scene_path][dropped_item_key].is_empty():
@@ -221,15 +228,18 @@ func _on_dropped_PickupableItem_removed(pickupable_item) -> void:
 
 
 func _on_dropped_PickupableItem_spawned(pickupable_item) -> void:
-	_make_saved_item(pickupable_item.item.id, true)
-	_append(pickupable_item, true)
+	var index : int = _index_at(pickupable_item, true)
+	# pickupable_item not found in _saved_items
+	if index == -1:
+		_make_saved_item(pickupable_item.item.id, true)
+		_append(pickupable_item, true)
 
 
 func _on_editor_PickupableItem_removed(pickupable_item) -> void:
 	# will be called after the queue_free in _on_editor_PickupableItem_spawned
-	if active_scene != pickupable_item.owner:
-		# prevents removing items when changing scenes
-		return
+#	if active_scene != pickupable_item.owner:
+#		# prevents removing items when changing scenes
+#		return
 
 	_make_saved_item(pickupable_item.item.id, false)
 	var index : int = _index_at(pickupable_item, false)
@@ -243,10 +253,10 @@ func _on_editor_PickupableItem_spawned(pickupable_item) -> void:
 	# all of those items will despawn
 	
 	# will change early but won't effect anything drastic
-	if active_scene != pickupable_item.owner:
-		active_scene = pickupable_item.owner
-		active_scene_path = active_scene.get_scene_file_path()
-		print("PickupableItemTrackerAutoload: active_scene = '%s'." % [active_scene_path])
+#	if active_scene != pickupable_item.owner:
+#		active_scene = pickupable_item.owner
+#		active_scene_path = active_scene.get_scene_file_path()
+#		print("PickupableItemTrackerAutoload: active_scene = '%s'." % [active_scene_path])
 	
 	var index : int = _index_at(pickupable_item, false)
 	# pickupable_item found in _saved_items

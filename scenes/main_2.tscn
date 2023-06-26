@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhslyx6wqx7xi"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_h0vi1"]
-[ext_resource type="PackedScene" uid="uid://bghvtati0dphu" path="res://scenes/player.tscn" id="2_4700a"]
-[ext_resource type="Script" path="res://scripts/utility/camera_zoom.gd" id="3_35ik8"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_bqrov"]
+[ext_resource type="PackedScene" uid="uid://bghvtati0dphu" path="res://scenes/player.tscn" id="2_f38sb"]
+[ext_resource type="Script" path="res://scripts/utility/camera_zoom.gd" id="3_lse84"]
 
 [node name="main2" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_h0vi1")
+script = ExtResource("1_bqrov")
 
-[node name="Player" parent="." instance=ExtResource("2_4700a")]
+[node name="Player" parent="." instance=ExtResource("2_f38sb")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="CameraZoom" type="Node" parent="Player/Camera2D" node_paths=PackedStringArray("camera")]
-script = ExtResource("3_35ik8")
+script = ExtResource("3_lse84")
 camera = NodePath("..")
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

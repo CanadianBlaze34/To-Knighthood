@@ -4,7 +4,7 @@ var item_id : int = -1
 var quantity : int = 0
 
 func get_item() -> ItemData:
-	return PreloadItemsAutoload_.get_item(item_id)
+	return PreloadItemsAutoload.get_item(item_id)
 
 
 func add_item(id : int, quantity_ : int) -> void:
