@@ -20,20 +20,20 @@ func _ready() -> void:
 
 func _remove_loaded_undead() -> void:
 	
-	print("'undead_killed' value: %d." % [Village1.undead_killed.value])
+	print("'undead_killed' value: %d." % [Village1Autoload.undead_killed.value])
 	
-	if Village1.killed_all_undead():
-		for i in Village1.undead_quantity:
+	if Village1Autoload.killed_all_undead():
+		for i in Village1Autoload.undead_quantity:
 			undead[i].queue_free()
 		undead.clear()
 		print("removed all undead.")
 		
 	else:
 		
-		for i in Village1.undead_quantity:
+		for i in Village1Autoload.undead_quantity:
 			# the bit has been set, unspawn the undead
-			if Village1.undead_killed.value & Village_1._bitdex(i):
-				print("skeleton%d removed with bit %d." % [i + 1, Village_1._bitdex(i)])
+			if Village1Autoload.undead_killed.value & Village1Autoload_._bitdex(i):
+				print("skeleton%d removed with bit %d." % [i + 1, Village1Autoload_._bitdex(i)])
 				undead[i].queue_free()
 
 
@@ -46,16 +46,16 @@ func _on_entity_death(node: Entity) -> void:
 		if not undead_to_remove in undead:
 			return
 		
-		for i in Village1.undead_quantity:
+		for i in Village1Autoload.undead_quantity:
 			if undead[i] == undead_to_remove:
 				undead[i].queue_free()
-				Village1.killed_undead(i)
-				print("'undead_killed' value: %d." % [Village1.undead_killed.value])
-				print("skeleton%d removed with bit %d." % [i + 1, Village_1._bitdex(i)])
+				Village1Autoload.killed_undead(i)
+				print("'undead_killed' value: %d." % [Village1Autoload.undead_killed.value])
+				print("skeleton%d removed with bit %d." % [i + 1, Village1Autoload_._bitdex(i)])
 				break
 		
 		print("%s died in village1." % [node.name])
 		
-		if Village1.killed_all_undead():
+		if Village1Autoload.killed_all_undead():
 			undead.clear()
 

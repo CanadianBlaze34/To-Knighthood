@@ -7,8 +7,7 @@ class_name TitleMenu extends Control
 
 @onready var saves: GridContainer = $LoadMenu/Saves
 
-#@onready var main_scene_res : PackedScene = preload("res://scenes/main.tscn")
-@onready var main_scene_res : PackedScene = preload("res://scenes/main_2.tscn")
+@onready var main_scene_res : PackedScene = preload("res://scenes/main.tscn")
 @export var button_theme : Theme 
 
 

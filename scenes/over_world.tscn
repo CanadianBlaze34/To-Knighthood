@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c6mxpi8t4sgng"]
+[gd_scene load_steps=31 format=3 uid="uid://c6mxpi8t4sgng"]
 
 [ext_resource type="PackedScene" uid="uid://054lnswde7g0" path="res://scenes/over_world_tilemap.tscn" id="1_jqylj"]
 [ext_resource type="Script" path="res://scripts/Village1.gd" id="2_wuwnf"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://kh1c57wq7jrq" path="res://resources/dialogue/village_1.dialogue" id="6_pha58"]
 [ext_resource type="Texture2D" uid="uid://dws8gp4mybc1p" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Villager3/SpriteSheet.png" id="7_alyuf"]
 [ext_resource type="Texture2D" uid="uid://uwloavlwilfx" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/OldMan3/SpriteSheet.png" id="8_v6ncx"]
+[ext_resource type="Script" path="res://scripts/npc/chief_dave_greeting.gd" id="9_eif43"]
 [ext_resource type="Texture2D" uid="uid://ceywgv8sa3ek0" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/OldMan2/SpriteSheet.png" id="9_nbnlf"]
 [ext_resource type="Script" path="res://scripts/village_1_cat.gd" id="10_wib67"]
 [ext_resource type="Texture2D" uid="uid://cmk7mynprjt6g" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Animals/Cat/SpriteSheet.png" id="11_wnmfe"]
@@ -16,10 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://dxvd8slto7hiy" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Weapons/Sword2/Sprite.png" id="14_70mm4"]
 [ext_resource type="Resource" uid="uid://oael15dgs2iu" path="res://resources/items/Sword.tres" id="15_u7t6l"]
 [ext_resource type="Resource" uid="uid://dcncxch20jbhg" path="res://resources/items/roes_milk.tres" id="17_3s475"]
-[ext_resource type="Texture2D" uid="uid://b1ojcrrk832tg" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Weapons/Sword/Sprite.png" id="18_jkfw7"]
 [ext_resource type="Script" path="res://scripts/village1_monsters.gd" id="18_mv3to"]
 [ext_resource type="PackedScene" uid="uid://8c5o8vfo37sy" path="res://scenes/skeleton.tscn" id="19_dfgu5"]
-[ext_resource type="Resource" uid="uid://cf0kbu86ly2fs" path="res://resources/items/parents_sword.tres" id="19_ichc0"]
 [ext_resource type="PackedScene" uid="uid://dlt2odp4oycd" path="res://scenes/scene_transition.tscn" id="20_t370o"]
 [ext_resource type="PackedScene" uid="uid://dlx23fu2unagq" path="res://scenes/player_room.tscn" id="21_3jjdb"]
 
@@ -31,6 +30,12 @@ radius = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gbje6"]
 radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u71qd"]
+size = Vector2(8, 5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_od275"]
+radius = 279.002
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fuxvj"]
 radius = 16.0
@@ -104,6 +109,25 @@ dialogue_start = "Chief_Dave"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Village1/NPCs/Chief Dave/DialogueArea"]
 shape = SubResource("CircleShape2D_gbje6")
 
+[node name="Chief Dave Greeting" parent="Village1/NPCs" instance=ExtResource("3_neicp")]
+position = Vector2(1256, 2873)
+script = ExtResource("9_eif43")
+
+[node name="Sprite2D" parent="Village1/NPCs/Chief Dave Greeting" index="0"]
+texture = ExtResource("8_v6ncx")
+
+[node name="CollisionShape2D" parent="Village1/NPCs/Chief Dave Greeting" index="1"]
+shape = SubResource("RectangleShape2D_u71qd")
+
+[node name="DialogueArea" parent="Village1/NPCs/Chief Dave Greeting" instance=ExtResource("5_ji4vk")]
+dialogue_resource = ExtResource("6_pha58")
+dialogue_start = "walk_out_of_house_Chief_Dave"
+start_automatic = true
+emit_finished_on_dialogue_end = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Village1/NPCs/Chief Dave Greeting/DialogueArea"]
+shape = SubResource("CircleShape2D_od275")
+
 [node name="Roe" parent="Village1/NPCs" instance=ExtResource("3_neicp")]
 position = Vector2(1424, 2856)
 metadata/_edit_lock_ = true
@@ -174,11 +198,6 @@ item = ExtResource("15_u7t6l")
 position = Vector2(1438, 2816)
 item = ExtResource("17_3s475")
 
-[node name="ParentsSword" parent="Village1/Items" instance=ExtResource("13_brgcd")]
-position = Vector2(1621, 2984)
-texture = ExtResource("18_jkfw7")
-item = ExtResource("19_ichc0")
-
 [node name="Monsters" type="Node2D" parent="Village1"]
 y_sort_enabled = true
 script = ExtResource("18_mv3to")
@@ -213,6 +232,7 @@ shape = SubResource("RectangleShape2D_2bwyj")
 [editable path="Village1/NPCs/Ashley"]
 [editable path="Village1/NPCs/Jill"]
 [editable path="Village1/NPCs/Chief Dave"]
+[editable path="Village1/NPCs/Chief Dave Greeting"]
 [editable path="Village1/NPCs/Roe"]
 [editable path="Village1/NPCs/Cat"]
 [editable path="Village1/NPCs/Yellow (Town Guard)"]

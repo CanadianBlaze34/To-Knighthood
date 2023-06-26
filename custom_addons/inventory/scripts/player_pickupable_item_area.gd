@@ -21,7 +21,7 @@ func _pickup_item() -> void:
 	# grab the last item to be reconized. Like a stack
 	var pickupable_item: PickupableItem = items_to_pickup.back()
 	print("picked up %s." % [pickupable_item.item.name])
-	Village1.has_item.emit(pickupable_item.item.id)
+	Village1Autoload.has_item.emit(pickupable_item.item.id)
 	item_pickup.emit(pickupable_item)
 	pickupable_item.pickedup()
 	pickupable_item.queue_free()

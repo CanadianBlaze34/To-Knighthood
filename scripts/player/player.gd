@@ -20,6 +20,8 @@ var save_global_position : SaveVector2
 func _ready() -> void:
 	_set_save_variables()
 	_connect_signals()
+	print("Player::_ready")
+	disable_walking()
 
 
 func _process(_delta: float) -> void:
@@ -53,11 +55,13 @@ func _free_save_variables() -> void:
 
 # Movement ---------------------------------------------------------------------
 
-func _enable_walking() -> void:
+func enable_walking() -> void:
+	print("Player::enable_walking")
 	movement.can_move = true
 
 
-func _disable_walking() -> void:
+func disable_walking() -> void:
+	print("Player::disable_walking")
 	movement.can_move = false
 
 
@@ -69,7 +73,7 @@ func _connect_signals() -> void:
 	
 	# remove any items from the inventory when given to an npc
 	# through Dialogue Manager
-	Village1.gave_item.connect(inventory.empty_slot_by_id)
+	Village1Autoload.gave_item.connect(inventory.empty_slot_by_id)
 	
 	inventory.equip_item.connect(_on_inventory_equip_item)
 	inventory.drop_item.connect(_on_inventory_drop_item)
@@ -87,10 +91,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_dialogic_area_dialogue_state(in_dialogue : bool) -> void:
 	if in_dialogue:
-		_disable_walking()
+		disable_walking()
 		_disable_attacking()
 	else:
-		_enable_walking()
+		enable_walking()
 		if equipable_weapon.texture:
 			_enable_attacking()
 
@@ -113,14 +117,14 @@ func _attack_input(event: InputEvent) -> void:
 func _attack_animation(anim_name: StringName) -> void:
 	if anim_name == "swing":
 		_enable_attacking()
-		_enable_walking()
+		enable_walking()
 		attack_box_collision_box.disabled = true
 		animation_player.play("weapon_idle")
 
 
 func _attack() -> void:
 	_disable_attacking()
-	_disable_walking()
+	disable_walking()
 	attack_box_collision_box.disabled = false
 	animation_player.play("swing")
 	attack_box.look_at(get_global_mouse_position())
@@ -166,7 +170,7 @@ func _on_inventory_drop_item(slot_data : InventorySlotData) -> void:
 	
 	print("dropped %s." % [item.name])
 	
-	Village1.dropped_item.emit(slot_data.item_id)
+	Village1Autoload.dropped_item.emit(slot_data.item_id)
 	
 	# unequipe equiped items
 	if weapon and item is EquipableItem and weapon == item:
@@ -185,7 +189,10 @@ func _on_inventory_equip_item(item : EquipableItem) -> void:
 
 func _on_pickupable_item_pickup(pickupable_item : PickupableItem)-> void:
 	# add item to inventory
-	inventory.add_item(pickupable_item)
+	add_item(pickupable_item.item, pickupable_item.quantity)
+
+func add_item(item : ItemData, quantity : int) -> void:
+	inventory.add_item(item, quantity)
 
 
 # ------------------------------------------------------------------------------

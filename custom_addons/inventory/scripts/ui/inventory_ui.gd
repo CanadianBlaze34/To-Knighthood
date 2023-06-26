@@ -144,12 +144,12 @@ func remove_slots(quantity : int) -> void:
 	inventory_size -= quantity
 
 
-func add_item(pickupable_item : PickupableItem) -> void:
+func add_item(item : ItemData, quantity : int) -> void:
 	for slot_index in inventory_size:
 		if not data.slot_has_item(slot_index):
 			# add item to slot
-			data.add_item(pickupable_item.item.id, pickupable_item.quantity, slot_index)
-			slots[slot_index].add_item(pickupable_item.item)
+			data.add_item(item.id, quantity, slot_index)
+			slots[slot_index].add_item(item)
 			return
 
 

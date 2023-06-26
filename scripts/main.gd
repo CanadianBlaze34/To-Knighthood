@@ -3,8 +3,11 @@ class_name Main extends Node2D
 @onready var player: Player = $Player
 var active_scene : SaveString
 
+signal give_player_item(item : ItemData, quantity : int)
 
 func _ready() -> void:
+	
+	Village1Autoload.gave_parents_sword.connect(_on_give_player_item)
 	
 	_set_save_variables()
 	
@@ -32,7 +35,7 @@ func _on_variables_loaded_from_file() -> void:
 	call_deferred("add_child", loaded_scene)
 	print("Main._ready() loading '%s' scene." % [active_scene.value])
 	
-	loaded_scene.ready.connect(PickupableItemTrackerAutoload.on_scene_ready.bind(loaded_scene))
+	loaded_scene.ready.connect(_on_new_scene_ready.bind(loaded_scene))
 
 
 func _free_save_variables() -> void:
@@ -44,6 +47,9 @@ func _exit_tree() -> void:
 
 
 # ----------------------------------------------------------------
+
+func _on_give_player_item(item : ItemData, quantity : int) -> void:
+	player.add_item(item, quantity)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("title_menu"):
@@ -62,9 +68,14 @@ func _on_child_entered_tree(node: Node) -> void:
 	if node.is_in_group("active_scene") and node.get_scene_file_path() != active_scene.value:
 		active_scene.value = node.get_scene_file_path()
 		PickupableItemTrackerAutoload.set_scene(node)
-		node.ready.connect(PickupableItemTrackerAutoload.on_scene_ready.bind(node))
+		node.ready.connect(_on_new_scene_ready.bind(node))
 
 
+func _on_new_scene_ready(new_scene : Node) -> void:
+	print("Main::_on_new_scene_ready")
+	PickupableItemTrackerAutoload.on_scene_ready(new_scene)
+	# SceneTransition._on_body_entered() will call player.disable_walking()
+	player.enable_walking()
 
 
 

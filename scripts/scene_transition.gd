@@ -20,3 +20,5 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	var player : Player = scene_parent.player
 	player.global_position = spawn_position
+	# Main._on_new_scene_ready() will call player.enable_walking()
+	player.disable_walking()

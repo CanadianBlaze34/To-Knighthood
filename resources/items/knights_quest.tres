@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_o730d")
 damage = 4.0
-name = "Parents Sword"
+name = "Knights Quest"
 texture = ExtResource("2_m8uxi")
 stack_limit = 1
 id = 2

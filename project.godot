@@ -19,7 +19,7 @@ config/icon="res://images/To Knighthood screenshot.png"
 
 PreloadItemsAutoload="*res://custom_addons/inventory/scripts/preload_items_autoload.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-Village1="*res://Autoload/village_1.gd"
+Village1Autoload="*res://Autoload/village_1_Autoload.gd"
 SaveLoad="*res://scripts/utility/saves/save_system.gd"
 _Quit="*res://scripts/utility/quit.gd"
 PickupableItemTrackerAutoload="*res://custom_addons/inventory/scripts/pickupable_item_tracker_autoload.gd"
@@ -27,7 +27,7 @@ EntityAutoload="*res://scripts/entity_autoload.gd"
 
 [dialogue_manager]
 
-general/states=["Village1"]
+general/states=["Village1", "Village1Autoload"]
 
 [display]
 

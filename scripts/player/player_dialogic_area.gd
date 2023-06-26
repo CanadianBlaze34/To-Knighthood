@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func _on_dialogue_ended(resource) -> void:
-	if _npc_dialogue and resource == _npc_dialogue.dialogue_resource:
+	if _npc_dialogue and resource == _npc_dialogue.dialogue_resource and _npc_dialogue.emit_finished_on_dialogue_end:
 		print("finished dialogue")
 		in_dialogue = false
 		dialogue_state.emit(in_dialogue)
@@ -50,4 +50,8 @@ func _on_area_exited(area: Area2D) -> void:
 	print("cant talk to %s." % [area.get_parent().name])
 	if area == _npc_dialogue:
 		_npc_dialogue = null 
+		if in_dialogue:
+			in_dialogue = false
+			dialogue_state.emit(in_dialogue)
+		
 

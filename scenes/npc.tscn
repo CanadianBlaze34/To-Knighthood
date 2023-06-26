@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds55apat6kv6b"]
+[gd_scene load_steps=4 format=3 uid="uid://ds55apat6kv6b"]
 
+[ext_resource type="Script" path="res://scripts/npc/npc.gd" id="1_mfgtw"]
 [ext_resource type="Texture2D" uid="uid://jrm52gw631ji" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/BlueNinja/SpriteSheet.png" id="1_wxl3m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_skei2"]
@@ -7,6 +8,7 @@ size = Vector2(8, 5)
 
 [node name="NPC" type="CharacterBody2D"]
 motion_mode = 1
+script = ExtResource("1_mfgtw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_wxl3m")

@@ -1,11 +1,12 @@
-class_name Village_1 extends Node # AutoLoad
+class_name Village1Autoload_ extends Node # AutoLoad
 
 #var found_Ashleys_cat : String = "" # ["has" | "gave"]
 var ashleys_cat : SaveString # ["has" | "gave"] (String)
 var quests_completed : SaveInt # 0, 1, 2, 3 (int)
 var undead_killed : SaveInt # 0, 1, 2, 3, 4, 5 SaveBitField
 var roes_milk : SaveString # ["has" | "gave"]
-var permission_to_leave : bool = false
+var _greeted_chief_dave : SaveBool
+var permission_to_leave : SaveBool
 var finished_jills_quest : SaveBool
 
 const parents_sword_name : String = "Knights Quest"
@@ -17,8 +18,8 @@ signal found_cat
 signal has_item(item_id : int)
 signal dropped_item(item_id : int)
 signal gave_item(item_id : int)
-signal gave_parents_sword
-
+signal gave_parents_sword(item : ItemData, quantity : int)
+signal finished_greeting_chief_dave
 
 
 func _ready() -> void:
@@ -45,6 +46,10 @@ func _set_save_variables() -> void:
 	undead_killed.init("undead_killed", 0)
 	finished_jills_quest = SaveBool.new()
 	finished_jills_quest.init("finished_jills_quest", false)
+	_greeted_chief_dave = SaveBool.new()
+	_greeted_chief_dave.init("talked_to_chief_dave", false)
+	permission_to_leave = SaveBool.new()
+	permission_to_leave.init("permission_to_leave", false)
 
 
 func _free_save_variables() -> void:
@@ -53,6 +58,8 @@ func _free_save_variables() -> void:
 	undead_killed.delete()
 	roes_milk.delete()
 	finished_jills_quest.delete()
+	_greeted_chief_dave.delete()
+	permission_to_leave.delete()
 
 
 func _exit_tree() -> void:
@@ -114,8 +121,8 @@ func dropped_roes_milk() -> void:
 func killed_all_undead() -> bool:
 #	const undead_quantity : int = 5
 #	return undead_killed.value >= undead_quantity
-	var undead_max : int = (Village_1._bitdex(0) + Village_1._bitdex(1) +
-		Village_1._bitdex(2) + Village_1._bitdex(3) + Village_1._bitdex(4))
+	var undead_max : int = (Village1Autoload_._bitdex(0) + Village1Autoload_._bitdex(1) +
+		Village1Autoload_._bitdex(2) + Village1Autoload_._bitdex(3) + Village1Autoload_._bitdex(4))
 	
 	return undead_killed.value == undead_max
 
@@ -123,7 +130,7 @@ func all_undead_are_killed() -> void:
 	_quest_complete()
 
 func killed_undead(undead_index : int) -> void:
-	undead_killed.value |= Village_1._bitdex(undead_index)
+	undead_killed.value |= Village1Autoload_._bitdex(undead_index)
 
 
 # Jill -------------------------------------------------------------
@@ -135,7 +142,33 @@ func jills_quest_finished() -> void:
 	finished_jills_quest.value = true
 	all_undead_are_killed()
 
-# ----------------------------------------------------------------
+
+# Chief Dave -------------------------------------------------------------------
+
+func greeted_chief_dave() -> void:
+	finished_greeting_chief_dave.emit()
+	_greeted_chief_dave.value = true
+
+func has_greeted_chief_dave() -> bool:
+	return _greeted_chief_dave.value
+
+func permission_to_leave_town() -> void:
+	permission_to_leave.value = true
+	grant_permission_to_leave_town()
+
+func give_parents_sword() -> void:
+	print("Received %s." % [parents_sword_name])
+	gave_parents_sword.emit(PreloadItemsAutoload.knights_quest, 1)
+
+# Yellow (Towns Guard) ---------------------------------------------------------
+
+func grant_permission_to_leave_town() -> void:
+	permission_granted_to_leave_town.emit()
+
+func has_grant_permission_to_leave_town() -> bool:
+	return permission_to_leave.value
+
+# ------------------------------------------------------------------------------
 
 func _has_item(item_id : int) -> void:
 	match item_id:
@@ -143,22 +176,11 @@ func _has_item(item_id : int) -> void:
 		roes_milk_item_id:
 			found_roes_milk()
 
-
 func _dropped_item(item_id : int) -> void:
 	match item_id:
 #		"Roes Milk":
 		roes_milk_item_id:
 			dropped_roes_milk()
-
-
-func permission_to_leave_town() -> void:
-	permission_to_leave = true
-	permission_granted_to_leave_town.emit()
-
-
-func give_parents_sword() -> void:
-	print("Received %s." % [parents_sword_name])
-	gave_parents_sword.emit()
 
 
 static func _bitdex(index : int) -> int: 

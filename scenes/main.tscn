@@ -1,14 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6vx7muxpuurf"]
+[gd_scene load_steps=4 format=3 uid="uid://bhslyx6wqx7xi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_cjj4v"]
 [ext_resource type="PackedScene" uid="uid://bghvtati0dphu" path="res://scenes/player.tscn" id="2_ruwap"]
 [ext_resource type="Script" path="res://scripts/utility/camera_zoom.gd" id="3_5ssiy"]
-[ext_resource type="Script" path="res://scripts/utility/quit.gd" id="4_fl1qc"]
 
-[node name="Main" type="Node2D"]
+[node name="main" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_cjj4v")
-metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("2_ruwap")]
 
@@ -18,10 +16,4 @@ metadata/_edit_lock_ = true
 script = ExtResource("3_5ssiy")
 camera = NodePath("..")
 
-[node name="Quit" type="Node" parent="."]
-script = ExtResource("4_fl1qc")
-
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
-
-[editable path="Player"]
-[editable path="Player/AttackBox"]

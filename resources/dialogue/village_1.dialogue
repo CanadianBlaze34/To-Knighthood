@@ -1,26 +1,35 @@
+~ walk_out_of_house_Chief_Dave
+
+Chief Dave: Good Morning!
+Chief Dave: Another beautiful day in Village1.
+Chief Dave: Can you help the Ashley, Jill and Roe today? When you're finished helping them, come see me.
+do Village1Autoload.greeted_chief_dave()
+
+=> END
+
 ~ Ashley
 
-if Village1.is_ashleys_cat_found() == true:
+if Village1Autoload.is_ashleys_cat_found() == true:
 	Ashley: Is that my kitty?
 	- Yeah, she was in a tree.
-		do Village1.give_ashleys_cat()
+		do Village1Autoload.give_ashleys_cat()
 		Ashley: Oh my god! Now I can hit the griddy with her! Thank you!
 	- Naw, this kitty doesn't hit the griddy.
 		Ashley: Awwuh! Titty twisters!
-elif Village1.gave_ashleys_cat() == true:
+elif Village1Autoload.gave_ashleys_cat() == true:
 	Ashley: Thanks for finding my Kitty. Now I can hit the griddy with her.
 else:
 	Ashley: Yo, I'm missing my little kitty. She's usually hitting the griddy. have you seen her?
 
 => has_completed_all_quests
-gave_ashleys_cat
+
 
 ~ Jill
 
-if Village1.killed_all_undead() == true:
+if Village1Autoload.killed_all_undead() == true:
 	Jill: You've killed all the undead. Elders can now pray for their lost ones in peace. Thanks for helping out the town again.
 	if has_talked_to_Jill_to_finish_quest() == false:
-		do Village1.jills_quest_finished()
+		do Village1Autoload.jills_quest_finished()
 else:
 	Jill: The graveyard is over ran with undead. It's no longer safe for elders to visit. Can you get rid of them?
 
@@ -29,13 +38,13 @@ else:
 
 ~ Roe
 
-if Village1.is_roes_milk_found() == true:
+if Village1Autoload.is_roes_milk_found() == true:
 	Roe: Have you found my milk?
 	- Yes, it was behind your shop!
 		do give_roes_milk()
 		Roe: Thank you! Now I can get back to selling food!
 	- No, I found this somewhere else.
-elif Village1.gave_roes_milk() == true:
+elif Village1Autoload.gave_roes_milk() == true:
 	Roe: Thank you for finding my milk. I can sell my food now.
 else:
 	Roe: Sorry, but I need help finding my milk. Can you help me?
@@ -46,18 +55,18 @@ else:
 ~ cat
 
 Cat: Meow
-do Village1.found_ashleys_cat()
+do Village1Autoload.found_ashleys_cat()
 => END
 
 ~ has_completed_all_quests
-if Village1.completed_all_quests() == true and not Village1.permission_to_leave:
+if Village1Autoload.completed_all_quests() == true and Village1Autoload.has_grant_permission_to_leave_town() == false:
 	=> Talk_to_Chief_Dave
 => END
 
 
 ~ Yellow_Town_Guard
 
-if not Village1.permission_to_leave:
+if Village1Autoload.has_grant_permission_to_leave_town() == false:
 	Yellow(Town Guard): Can't let you pass. Not safe.
 else:
 	Yellow(Town Guard): Chief Dave gave permission to let you pass.
@@ -73,20 +82,20 @@ Chief Dave was asking for you earlier. You should go see him.
 
 
 ~ Chief_Dave
-if not Village1.permission_to_leave:
+if Village1Autoload.has_grant_permission_to_leave_town() == false:
 	Chief Dave: Good Morning!
 	
-	if Village1.completed_all_quests() == true:
+	if Village1Autoload.completed_all_quests() == true:
 		Chief Dave: I've been meaning to talk to you.
 		Chief Dave: You've always been helpful around the town and I believe you can do better.
 		Chief Dave: Just like your parents, you have a fine aptitude for Knighthood. You should travel to the Kingdom and apply.
 		
 		Chief Dave: I've let Yellow, the Towns Guard, know that you're ready to leave.
-		do Village1.permission_to_leave_town()
+		do Village1Autoload.permission_to_leave_town()
 		
 		Chief Dave: Also! Take this.
-		Received {{Village1.parents_sword_name}}!
-		do Village1.give_parents_sword()
+		Received {{Village1Autoload.parents_sword_name}}!
+		do Village1Autoload.give_parents_sword()
 		Chief Dave: Your parents gave the Town this sword for protection.
 		Chief Dave: I believe it'll be better put into your hands.
 		
