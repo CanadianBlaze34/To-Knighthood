@@ -9,7 +9,7 @@ class_name InventoryUI extends NinePatchRect
 @onready var drop_box: DropBoxUI = $DropBox
 
 signal drop_item(slot_data : InventorySlotData)
-signal equip_item(item: EquipableItem)
+signal equip_item(item: EquipableItem, slot_index : int)
 
 
 var slots : Array[InventorySlotUI] = []
@@ -48,7 +48,7 @@ func _create_item_drop_box(slot_index : int) -> void:
 		drop_box.global_position = new_position
 		
 		var names_and_functions : Dictionary =\
-			_generate_names_and_functions(inventory_slot_data)
+			_generate_names_and_functions(inventory_slot_data, slot_index)
 		
 		drop_box.make_buttons(names_and_functions)
 		
@@ -63,7 +63,7 @@ func _create_item_drop_box(slot_index : int) -> void:
 		drop_box.visible = not drop_box.visible
 
 
-func _generate_names_and_functions(slot_data : InventorySlotData) -> Dictionary:
+func _generate_names_and_functions(slot_data : InventorySlotData, slot_index : int) -> Dictionary:
 	var names_and_functions : Dictionary = {}
 	
 	var slot_data_item : ItemData = slot_data.get_item()
@@ -71,11 +71,11 @@ func _generate_names_and_functions(slot_data : InventorySlotData) -> Dictionary:
 	if slot_data_item is EquipableItem:
 		if slot_data_item.equiped:
 			names_and_functions["Unequip"] = func():
-				equip_item.emit(slot_data_item as EquipableItem)
+				equip_item.emit(slot_data_item as EquipableItem, slot_index)
 				drop_box.hide()
 		else:
 			names_and_functions["Equip"] = func():
-				equip_item.emit(slot_data_item as EquipableItem)
+				equip_item.emit(slot_data_item as EquipableItem, slot_index)
 				drop_box.hide()
 	
 	

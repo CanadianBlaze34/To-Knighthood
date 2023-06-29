@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c6mxpi8t4sgng"]
+[gd_scene load_steps=37 format=3 uid="uid://c6mxpi8t4sgng"]
 
 [ext_resource type="PackedScene" uid="uid://054lnswde7g0" path="res://scenes/over_world_tilemap.tscn" id="1_jqylj"]
 [ext_resource type="Script" path="res://scripts/Village1.gd" id="2_wuwnf"]
@@ -21,6 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://8c5o8vfo37sy" path="res://scenes/skeleton.tscn" id="19_dfgu5"]
 [ext_resource type="PackedScene" uid="uid://dlt2odp4oycd" path="res://scenes/scene_transition.tscn" id="20_t370o"]
 [ext_resource type="PackedScene" uid="uid://dlx23fu2unagq" path="res://scenes/player_room.tscn" id="21_3jjdb"]
+[ext_resource type="Script" path="res://scripts/npc/monk_1.gd" id="22_gs0r4"]
+[ext_resource type="Resource" uid="uid://biygts3ly6dac" path="res://resources/dialogue/mystery_forest.dialogue" id="23_jscjk"]
+[ext_resource type="Script" path="res://scripts/spawn_forest_slimes.gd" id="24_oc6ry"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bqob7"]
 radius = 16.0
@@ -49,6 +52,17 @@ size = Vector2(32, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2bwyj"]
 size = Vector2(14, 11)
+
+[sub_resource type="Gradient" id="Gradient_6yegg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.99061)
+colors = PackedColorArray(0, 0, 0, 0.517647)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bbg4q"]
+gradient = SubResource("Gradient_6yegg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eec5h"]
+size = Vector2(64, 48)
 
 [node name="OverWorld" type="Node2D" groups=["active_scene"]]
 y_sort_enabled = true
@@ -228,6 +242,34 @@ spawn_position = Vector2(40, 75)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Village1/Transitions/PlayerHouseTransition"]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_2bwyj")
+
+[node name="MysteryForest" type="Node2D" parent="."]
+
+[node name="Forest Shade" type="Sprite2D" parent="MysteryForest"]
+z_index = 5
+position = Vector2(464, 2776)
+scale = Vector2(18.5, 18.25)
+texture = SubResource("GradientTexture2D_bbg4q")
+
+[node name="NPCs" type="Node2D" parent="MysteryForest"]
+
+[node name="Monk 1" parent="MysteryForest/NPCs" instance=ExtResource("3_neicp")]
+position = Vector2(272, 2828)
+script = ExtResource("22_gs0r4")
+
+[node name="DialogueArea" parent="MysteryForest/NPCs/Monk 1" instance=ExtResource("5_ji4vk")]
+dialogue_resource = ExtResource("23_jscjk")
+dialogue_start = "monk_1"
+start_automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MysteryForest/NPCs/Monk 1/DialogueArea"]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_eec5h")
+
+[node name="Monsters" type="Node2D" parent="MysteryForest"]
+
+[node name="Slimes" type="Node2D" parent="MysteryForest/Monsters"]
+script = ExtResource("24_oc6ry")
 
 [editable path="Village1/NPCs/Ashley"]
 [editable path="Village1/NPCs/Jill"]

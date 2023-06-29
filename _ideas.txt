@@ -44,3 +44,23 @@ Linear gameplay
 
 - town gaurd will block the path to the kingdom to prevent the player 
 	from leaving the town
+
+
+-goes into the forest have to appease the 3 forest munks as they havent had fun in a while
+-after helping the 3rd munk, the high munk comes in and allows you passage while also giving you a reward for the inconvience 
+	-first monk 
+		-kill a slime for a slime fish
+			-kill slime creatures and they'll drop a slime-goo
+			-place several slime-goo by a dock and to attract slime fish
+	-second monk
+		-kill a bear with only eggs
+		-can get eggs by shaking trees
+	-third monk
+		-leads you to the legendary golden raccoon
+		-hitting it does no damage
+		-it one shots you
+		-the 4th monk appears
+	-fourth monk
+		-calms the legendary raccoon and the raccoon flees
+		-Apologizes for the 3 munks behaviours 
+		

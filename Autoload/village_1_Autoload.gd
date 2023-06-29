@@ -27,6 +27,7 @@ func _ready() -> void:
 	has_item.connect(_has_item)
 	dropped_item.connect(_dropped_item)
 
+
 # SaveVariable ----------------------------------------------------------------
 
 func _set_save_variables() -> void:

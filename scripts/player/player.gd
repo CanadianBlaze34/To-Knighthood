@@ -13,6 +13,7 @@ class_name Player extends CharacterBody2D
 
 var attacking : bool = true
 var save_global_position : SaveVector2
+var save_equiped_inventory_weapon : SaveInt
 
 # Overridden Methods -----------------------------------------------------------
 
@@ -43,14 +44,18 @@ func _exit_tree() -> void:
 func _set_save_variables() -> void:
 	save_global_position = SaveVector2.new()
 	save_global_position.init("player_position", Vector2(87.0, 50.0))
+	save_equiped_inventory_weapon = SaveInt.new()
+	save_equiped_inventory_weapon.init("save_equiped_inventory_weapon", -1)
 
 
 func _on_variables_loaded_from_file() -> void:
 	global_position = save_global_position.value
+	inventory.loaded_inventory_from_save.connect(_on_inventory_loaded_inventory_from_save)
 
 
 func _free_save_variables() -> void:
 	save_global_position.delete()
+	save_equiped_inventory_weapon.delete()
 
 
 # Movement ---------------------------------------------------------------------
@@ -177,13 +182,21 @@ func _on_inventory_drop_item(slot_data : InventorySlotData) -> void:
 		_unequip_weapon()
 
 
-func _on_inventory_equip_item(item : EquipableItem) -> void:
+func _on_inventory_equip_item(item : EquipableItem, slot_index : int) -> void:
 	if item is Weapon:
 		if item == weapon:
+			save_equiped_inventory_weapon.value = -1
 			_unequip_weapon()
 		else:
+			save_equiped_inventory_weapon.value = slot_index
 			_equip_weapon(item as Weapon)
 
+
+func _on_inventory_loaded_inventory_from_save() -> void:
+	print("Player::_on_inventory_loaded_inventory_from_save")
+	# there is an assigned equiped weapon in the inventory
+	if save_equiped_inventory_weapon.value != -1:
+		_on_inventory_equip_item(inventory.data.slot_item(save_equiped_inventory_weapon.value) as EquipableItem, save_equiped_inventory_weapon.value)
 
 # PickupableItem ---------------------------------------------------------------
 

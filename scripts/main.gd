@@ -53,6 +53,7 @@ func _on_give_player_item(item : ItemData, quantity : int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("title_menu"):
+		ItemSpawnerAutoload.save_exited.emit()
 		_goto_title_menu()
 
 

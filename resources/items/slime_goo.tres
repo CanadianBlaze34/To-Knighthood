@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bvey4guewa1qk"]
+
+[ext_resource type="Script" path="res://custom_addons/inventory/scripts/data/item_data.gd" id="1_enh8x"]
+[ext_resource type="Texture2D" uid="uid://ew08cike0ec2" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Food/Seed2.png" id="2_suc80"]
+
+[resource]
+script = ExtResource("1_enh8x")
+name = "Slime-goo"
+texture = ExtResource("2_suc80")
+stack_limit = 16
+id = 4

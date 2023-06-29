@@ -2,7 +2,7 @@ class_name PlayerInventory extends SaveInventoryUI
 
 @export var player : Player
 
-func _generate_names_and_functions(slot_data : InventorySlotData) -> Dictionary:
+func _generate_names_and_functions(slot_data : InventorySlotData, slot_index : int) -> Dictionary:
 	var names_and_functions : Dictionary = {}
 	
 	var slot_data_item : ItemData = slot_data.get_item()
@@ -11,11 +11,11 @@ func _generate_names_and_functions(slot_data : InventorySlotData) -> Dictionary:
 		# player has the item already equiped
 		if player.weapon and player.weapon.texture == slot_data_item.texture:
 			names_and_functions["Unequip"] = func():
-				equip_item.emit(slot_data_item as EquipableItem)
+				equip_item.emit(slot_data_item as EquipableItem, slot_index)
 				drop_box.hide()
 		else:
 			names_and_functions["Equip"] = func():
-				equip_item.emit(slot_data_item as EquipableItem)
+				equip_item.emit(slot_data_item as EquipableItem, slot_index)
 				drop_box.hide()
 	
 	

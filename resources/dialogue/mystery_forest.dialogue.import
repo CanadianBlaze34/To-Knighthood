@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_8"
+type="Resource"
+uid="uid://biygts3ly6dac"
+path="res://.godot/imported/mystery_forest.dialogue-98fc778f46eef78632d1526424a224d4.tres"
+
+[deps]
+
+source_file="res://resources/dialogue/mystery_forest.dialogue"
+dest_files=["res://.godot/imported/mystery_forest.dialogue-98fc778f46eef78632d1526424a224d4.tres"]
+
+[params]
+
+defaults=true

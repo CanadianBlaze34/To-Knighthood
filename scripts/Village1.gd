@@ -4,10 +4,10 @@ extends Node2D
 @onready var dialogue_area: DialogueAction = $"NPCs/Yellow (Town Guard)/DialogueArea"
 
 func _ready() -> void:
-	Village1Autoload.permission_granted_to_leave_town.connect(_on_permission_to_leave_town)
-	
 	if Village1Autoload.has_grant_permission_to_leave_town():
-		Village1Autoload.grant_permission_to_leave_town()
+		_on_permission_to_leave_town()
+	else:
+		Village1Autoload.permission_granted_to_leave_town.connect(_on_permission_to_leave_town)
 
 
 func _on_permission_to_leave_town() -> void:

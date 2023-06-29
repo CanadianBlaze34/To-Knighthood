@@ -1,6 +1,7 @@
 # https://www.youtube.com/watch?v=dMYv6InQgno&list=PLcZp9zrMgnmOOQXevC-2CfH67QP3mB4wv&ab_channel=Calame321
 class_name SaveInventoryUI extends InventoryUI
 
+signal loaded_inventory_from_save
 
 func _ready() -> void:
 	super._ready()
@@ -53,7 +54,8 @@ func _load_inventory_from_file() -> void:
 				print("Slot %d has no item." % [slot_index])
 				slots[slot_index].remove_item()
 				data.remove_item(slot_index)
-			
+	
+	loaded_inventory_from_save.emit()
 
 
 func save_inventory() -> void:
