@@ -8,6 +8,7 @@ signal give_player_item(item : ItemData, quantity : int)
 func _ready() -> void:
 	
 	Village1Autoload.gave_parents_sword.connect(_on_give_player_item)
+	MysteryForestAutoload.player = player
 	
 	_set_save_variables()
 	
@@ -44,6 +45,8 @@ func _free_save_variables() -> void:
 
 func _exit_tree() -> void:
 	_free_save_variables()
+	MysteryForestAutoload.player = null
+
 
 
 # ----------------------------------------------------------------

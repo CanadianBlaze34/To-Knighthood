@@ -18,6 +18,7 @@ func _set_up_saved_data() -> void:
 	else:
 		MysteryForestAutoload.monk_1_initial_talk_signal.connect(_on_monk_1_initial_talk_signal)
 
+# Village 1 --------------------------------------------------------------------
 
 func _on_permission_to_leave_town() -> void:
 	_remove_village_1_invisible_barrier()
@@ -29,12 +30,33 @@ func _remove_village_1_invisible_barrier() -> void:
 	erase_cell(wall_layer, Vector2i(99, 170))
 	erase_cell(wall_layer, Vector2i(100, 170))
 
+# forest -----------------------------------------------------------------------
 
 func _on_monk_1_initial_talk_signal()-> void:
 	_open_first_path()
+	
+	if MysteryForestAutoload.has_monk_1_quest_complete():
+		_on_monk_1_quest_complete()
+	else:
+		MysteryForestAutoload.monk_1_quest_complete.connect(_on_monk_1_quest_complete)
+
+
+func _on_monk_1_quest_complete() -> void:
+	_remove_trees_behind_monk_1()
+
+
+func _remove_trees_behind_monk_1() -> void:
+	const remove_trees_positions : Array[Vector2i] = [
+		Vector2i(15, 175), Vector2i(16, 175),
+		Vector2i(17, 175), Vector2i(18, 175)
+	]
+	for tree_position in remove_trees_positions:
+		erase_cell(_trees_layer, tree_position)
+
 
 func _open_first_path() -> void:
 	print("OverWorldTilemap::_open_first_path")
+	
 	# spawn forest grass
 	const grass_positions : Array[Vector2i] = [
 		Vector2i(46, 183), Vector2i(47, 183),
@@ -55,7 +77,6 @@ func _open_first_path() -> void:
 		Vector2i(46, 187), Vector2i(47, 187),
 		Vector2i(46, 188), Vector2i(47, 188)
 	]
-	
 	for tree_position in remove_trees_positions:
 		erase_cell(_trees_layer, tree_position)
 	
@@ -65,7 +86,6 @@ func _open_first_path() -> void:
 		Vector2i(44, 185), Vector2i(45, 185), Vector2i(48, 185), Vector2i(49, 185),
 		Vector2i(44, 186), Vector2i(45, 186), Vector2i(48, 186), Vector2i(49, 186)
 	]
-	
 	for tree_position in spawn_trees_positions:
 		_spawn_forest_trees(tree_position)
 

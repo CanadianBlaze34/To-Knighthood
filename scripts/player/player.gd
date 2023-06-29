@@ -15,6 +15,8 @@ var attacking : bool = true
 var save_global_position : SaveVector2
 var save_equiped_inventory_weapon : SaveInt
 
+signal activate_event
+
 # Overridden Methods -----------------------------------------------------------
 
 
@@ -33,6 +35,7 @@ func _process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	_inventory_input(event)
 	_attack_input(event)
+	_event_input(event)
 
 
 func _exit_tree() -> void:
@@ -204,8 +207,16 @@ func _on_pickupable_item_pickup(pickupable_item : PickupableItem)-> void:
 	# add item to inventory
 	add_item(pickupable_item.item, pickupable_item.quantity)
 
+
 func add_item(item : ItemData, quantity : int) -> void:
 	inventory.add_item(item, quantity)
+
+
+# Events -----------------------------------------------------------------------
+
+func _event_input(event: InputEvent) -> void:
+	if event.is_action_pressed("event"):
+		activate_event.emit()
 
 
 # ------------------------------------------------------------------------------

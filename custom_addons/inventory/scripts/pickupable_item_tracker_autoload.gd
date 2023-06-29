@@ -99,7 +99,7 @@ func set_scene(new_scene : Node) -> void:
 	active_scene_path = active_scene.get_scene_file_path()
 
 
-func on_scene_ready(new_scene : Node) -> void:
+func on_scene_ready(_new_scene : Node) -> void:
 	# try to load the scene that has been changed to
 	# keep all items tracked with all their scenes loaded in a local dictionary 
 	# if there are items in the new scene, load the items at their location

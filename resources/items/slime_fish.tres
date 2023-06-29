@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dkhxk80abbejx"]
+
+[ext_resource type="Script" path="res://custom_addons/inventory/scripts/data/item_data.gd" id="1_yf4so"]
+[ext_resource type="Texture2D" uid="uid://dskpjmkvl2xex" path="res://assets/NinjaAdventure(SupporterEdition)/Items/Food/Fish.png" id="2_8lfpc"]
+
+[resource]
+script = ExtResource("1_yf4so")
+name = "Slime Fish"
+texture = ExtResource("2_8lfpc")
+stack_limit = 1
+id = 5

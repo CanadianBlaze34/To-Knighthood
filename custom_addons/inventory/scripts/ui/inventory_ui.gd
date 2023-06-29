@@ -120,6 +120,12 @@ func ready_inventory(new_size : int) -> void:
 		new_slot.gui_input.connect(_on_inventory_slot_gui_input.bind(slot_index))
 		slot_container.add_child(new_slot)
 
+func has_item(item : ItemData) -> bool:
+	for index in inventory_size:
+		if data.slot_has_item(index) and data.slot_item_id(index) == item.id:
+			return true
+	return false
+
 
 func add_slots(quantity : int) -> void:
 	data.inventory.resize(inventory_size + quantity)
@@ -143,13 +149,20 @@ func remove_slots(quantity : int) -> void:
 	data.inventory.resize(inventory_size - quantity)
 	inventory_size -= quantity
 
+func empty_slot_by_index(index : int) -> void:
+	data.remove_item(index)
+	slots[index].remove_item()
+
+func add_item_to_slot_by_index(item : ItemData, quantity : int, index : int) -> void:
+	data.add_item(item.id, quantity, index)
+	slots[index].add_item(item)
+
 
 func add_item(item : ItemData, quantity : int) -> void:
 	for slot_index in inventory_size:
 		if not data.slot_has_item(slot_index):
 			# add item to slot
-			data.add_item(item.id, quantity, slot_index)
-			slots[slot_index].add_item(item)
+			add_item_to_slot_by_index(item, quantity, slot_index)
 			return
 
 
@@ -168,8 +181,7 @@ func empty_slot_by_name(item_name : String) -> void:
 		if data.slot_has_item(slot_index):
 			# remove item in slot
 			if data.slot_item(slot_index).name == item_name:
-				data.remove_item(slot_index)
-				slots[slot_index].remove_item()
+				empty_slot_by_index(slot_index)
 				return
 
 
@@ -178,9 +190,40 @@ func empty_slot_by_id(item_id : int) -> void:
 		if data.slot_has_item(slot_index):
 			# remove item in slot
 			if data.slot_item_id(slot_index) == item_id:
-				data.remove_item(slot_index)
-				slots[slot_index].remove_item()
+				empty_slot_by_index(slot_index)
 				return
+
+
+func remove_item_quantity(item : ItemData, quantity : int) -> void:
+	
+	for index in data.size:
+		
+		var has_item : bool = data.slot_has_item(index)
+		if not has_item: 
+			continue
+		
+		var item_in_slot : bool = data.slot_item_id(index) == item.id
+		if not item_in_slot:
+			continue
+		
+		
+		var quantity_in_slot : int = data.slot_quantity(index)
+		if quantity_in_slot != quantity:
+			if quantity_in_slot > quantity:
+				data.remove_quantity(quantity, index)
+				break
+			else:
+				quantity -= quantity_in_slot
+				empty_slot_by_index(index)
+		else:
+			empty_slot_by_index(index)
+			break
+
+
+func item_amount(item : ItemData) -> int:
+	return data.item_amount(item)
+
+
 
 func _on_mouse_exited() -> void:
 	# this function will also be triggered when entering a child node

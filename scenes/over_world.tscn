@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c6mxpi8t4sgng"]
+[gd_scene load_steps=39 format=3 uid="uid://bv8ynml7k8xmm"]
 
 [ext_resource type="PackedScene" uid="uid://054lnswde7g0" path="res://scenes/over_world_tilemap.tscn" id="1_jqylj"]
 [ext_resource type="Script" path="res://scripts/Village1.gd" id="2_wuwnf"]
@@ -22,8 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://dlt2odp4oycd" path="res://scenes/scene_transition.tscn" id="20_t370o"]
 [ext_resource type="PackedScene" uid="uid://dlx23fu2unagq" path="res://scenes/player_room.tscn" id="21_3jjdb"]
 [ext_resource type="Script" path="res://scripts/npc/monk_1.gd" id="22_gs0r4"]
+[ext_resource type="Script" path="res://scripts/mystery_forest.gd" id="22_ivq1v"]
 [ext_resource type="Resource" uid="uid://biygts3ly6dac" path="res://resources/dialogue/mystery_forest.dialogue" id="23_jscjk"]
-[ext_resource type="Script" path="res://scripts/spawn_forest_slimes.gd" id="24_oc6ry"]
+[ext_resource type="Script" path="res://scripts/slime_fish_event.gd" id="25_18iw1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bqob7"]
 radius = 16.0
@@ -63,6 +64,9 @@ gradient = SubResource("Gradient_6yegg")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eec5h"]
 size = Vector2(64, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36gvn"]
+size = Vector2(32, 31.9999)
 
 [node name="OverWorld" type="Node2D" groups=["active_scene"]]
 y_sort_enabled = true
@@ -244,6 +248,7 @@ position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_2bwyj")
 
 [node name="MysteryForest" type="Node2D" parent="."]
+script = ExtResource("22_ivq1v")
 
 [node name="Forest Shade" type="Sprite2D" parent="MysteryForest"]
 z_index = 5
@@ -268,8 +273,16 @@ shape = SubResource("RectangleShape2D_eec5h")
 
 [node name="Monsters" type="Node2D" parent="MysteryForest"]
 
-[node name="Slimes" type="Node2D" parent="MysteryForest/Monsters"]
-script = ExtResource("24_oc6ry")
+[node name="Events" type="Node2D" parent="MysteryForest"]
+
+[node name="SlimeFishEvent" type="Node2D" parent="MysteryForest/Events"]
+position = Vector2(896, 3216)
+script = ExtResource("25_18iw1")
+
+[node name="Area2D" type="Area2D" parent="MysteryForest/Events/SlimeFishEvent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MysteryForest/Events/SlimeFishEvent/Area2D"]
+shape = SubResource("RectangleShape2D_36gvn")
 
 [editable path="Village1/NPCs/Ashley"]
 [editable path="Village1/NPCs/Jill"]

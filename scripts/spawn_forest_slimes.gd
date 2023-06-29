@@ -1,4 +1,6 @@
-extends Node2D
+class_name SpawnForestSlimes extends Node2D
+
+signal spawn_monster(entity : Entity)
 
 func _ready() -> void:
 	("Slimes::_ready")
@@ -27,5 +29,7 @@ func _spawn_slimes() -> void:
 		var slime : Slime = slime_prefab.instantiate()
 		slime.name = "Slime%d" % (i + 1)
 		slime.global_position = slime_positions[i]
-		add_child(slime)
+		spawn_monster.emit(slime)
+	
+	queue_free()
 

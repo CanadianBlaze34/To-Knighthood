@@ -4,7 +4,14 @@ if MysteryForestAutoload.has_initially_talked_with_monk_1() == false:
 	Monk: Not much to do around here.
 	Monk: I have an idea!
 	Monk: Why don't you intertain me.
-	Monk: If you fetch me a painted fish, I'll let you pass!
+	Monk: If you fetch me a 'Slime Fish', I'll let you pass!
 	do MysteryForestAutoload.initial_talk_with_monk_1()
+elif MysteryForestAutoload.has_initially_talked_with_monk_1() == true:
+	if MysteryForestAutoload.player_has_slime_fish() == true:
+		Monk: You have the fish?
+		Monk: Thanks for the fish.
+		do MysteryForestAutoload.remove_slime_fish_from_player_inventory()
+	else:
+		Monk: Can you get the slime fish already?
 
 => END

@@ -36,6 +36,52 @@ func remove_quantity(quantity : int, index : int) -> void:
 	inventory[index].remove_quantity(quantity)
 
 
+func remove_item_quantity(item : ItemData, quantity : int) -> void:
+	
+	for index in size:
+		
+		var has_item : bool = slot_has_item(index)
+		if not has_item: 
+			continue
+		
+		var item_in_slot : bool = slot_item_id(index) == item.id
+		if not item_in_slot:
+			continue
+		
+		
+		var quantity_in_slot : int = slot_quantity(index)
+		if quantity_in_slot != quantity:
+			if quantity_in_slot > quantity:
+				remove_quantity(quantity, index)
+				break
+			else:
+				quantity -= quantity_in_slot
+				remove_item(index)
+		else:
+			remove_item(index)
+			break
+
+
+func item_amount(item : ItemData) -> int:
+	
+	var item_amount_ : int = 0
+	
+	for index in size:
+		
+		var has_item : bool = slot_has_item(index)
+		if not has_item: 
+			continue
+		
+		var item_in_slot : bool = slot_item_id(index) == item.id
+		if not item_in_slot:
+			continue
+		
+		item_amount_ += slot_quantity(index)
+		break
+	
+	return item_amount_
+
+
 func slot_has_item(index : int) -> bool:
 	return inventory[index].has_item()
 
