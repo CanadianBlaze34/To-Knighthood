@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://dibm65q3w8fj4"]
+
+[ext_resource type="PackedScene" uid="uid://ds55apat6kv6b" path="res://scenes/npc.tscn" id="1_0empr"]
+[ext_resource type="Script" path="res://scripts/raccoon.gd" id="1_o6jvs"]
+[ext_resource type="Texture2D" uid="uid://bl6n6ua14aw4l" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Animals/Racoon/SpriteSheet.png" id="2_4ybdt"]
+[ext_resource type="PackedScene" uid="uid://b2qru4amvjy1i" path="res://scenes/defense_box.tscn" id="3_4bw3e"]
+[ext_resource type="PackedScene" uid="uid://btmcsl3sr15q4" path="res://scenes/pet_entity.tscn" id="5_4k4ow"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2xllh"]
+size = Vector2(18, 12)
+
+[node name="Raccoon" type="Node2D"]
+script = ExtResource("1_o6jvs")
+
+[node name="NPC" parent="." instance=ExtResource("1_0empr")]
+
+[node name="Sprite2D" parent="NPC" index="0"]
+texture = ExtResource("2_4ybdt")
+hframes = 2
+vframes = 1
+
+[node name="CollisionShape2D" parent="NPC" index="1"]
+visible = false
+position = Vector2(0, 1)
+
+[node name="DefenseBox" parent="." instance=ExtResource("3_4bw3e")]
+
+[node name="CollisionShape2D" parent="DefenseBox" index="0"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_2xllh")
+
+[node name="PetEntity" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("5_4k4ow")]
+entity = NodePath("..")
+
+[editable path="NPC"]
+[editable path="DefenseBox"]

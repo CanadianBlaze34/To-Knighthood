@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bghvtati0dphu"]
+[gd_scene load_steps=19 format=3 uid="uid://bghvtati0dphu"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_btr83"]
 [ext_resource type="Texture2D" uid="uid://brxqvoxw8tnyr" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Boy/SeparateAnim/Walk.png" id="2_x1uhx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://custom_addons/inventory/scripts/player_pickupable_item_area.gd" id="5_cxe2f"]
 [ext_resource type="PackedScene" uid="uid://bywnmmwprecpq" path="res://scenes/attack_box.tscn" id="6_dui18"]
 [ext_resource type="Script" path="res://scripts/movement.gd" id="7_47mx7"]
+[ext_resource type="PackedScene" uid="uid://b2qru4amvjy1i" path="res://scenes/defense_box.tscn" id="8_ddnic"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fc5dt"]
 radius = 17.0294
@@ -213,4 +214,8 @@ position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_cqv7g")
 debug_color = Color(0.647059, 0.427451, 0.772549, 0.419608)
 
+[node name="DefenseBox" parent="." instance=ExtResource("8_ddnic")]
+die_on_hit = false
+
 [editable path="AttackBox"]
+[editable path="DefenseBox"]

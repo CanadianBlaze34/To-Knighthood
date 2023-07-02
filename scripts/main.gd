@@ -54,6 +54,7 @@ func _exit_tree() -> void:
 func _on_give_player_item(item : ItemData, quantity : int) -> void:
 	player.add_item(item, quantity)
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("title_menu"):
 		ItemSpawnerAutoload.save_exited.emit()

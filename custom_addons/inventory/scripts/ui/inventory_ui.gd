@@ -198,8 +198,8 @@ func remove_item_quantity(item : ItemData, quantity : int) -> void:
 	
 	for index in data.size:
 		
-		var has_item : bool = data.slot_has_item(index)
-		if not has_item: 
+		var has_item_ : bool = data.slot_has_item(index)
+		if not has_item_: 
 			continue
 		
 		var item_in_slot : bool = data.slot_item_id(index) == item.id

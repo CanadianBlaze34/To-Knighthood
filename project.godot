@@ -26,6 +26,7 @@ PickupableItemTrackerAutoload="*res://custom_addons/inventory/scripts/pickupable
 EntityAutoload="*res://scripts/entity_autoload.gd"
 MysteryForestAutoload="*res://Autoload/mystery_forest_autoload.gd"
 ItemSpawnerAutoload="*res://Autoload/item_spawner_autoload.gd"
+StatsAutoload="*res://Autoload/stats_autoload.gd"
 
 [dialogue_manager]
 

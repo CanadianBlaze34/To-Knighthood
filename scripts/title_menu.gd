@@ -54,7 +54,7 @@ func _make_load_button(saved_game_name: String) -> Button:
 	@warning_ignore("int_as_enum_without_cast", "int_as_enum_without_match")
 	button.set_button_mask(MOUSE_BUTTON_MASK_LEFT | MOUSE_BUTTON_MASK_RIGHT)
 	
-	button.gui_input.connect(_on_load_button_saved_game_gui_input.bind(saved_game_name))
+	button.gui_input.connect(_on_load_button_saved_game_gui_input.bind(button, saved_game_name))
 	
 	return button
 
@@ -77,9 +77,8 @@ func _remove_previously_loaded_saved_games_buttons() -> void:
 
 # Signals ----------------------------------------------------------------------
 
-
 func _on_load_button_saved_game_gui_input(event : InputEvent,
-		saved_game_name: String) -> void:
+		this : Button, saved_game_name: String) -> void:
 	
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
@@ -88,7 +87,7 @@ func _on_load_button_saved_game_gui_input(event : InputEvent,
 				print("Loading %s." % [saved_game_name])
 				SaveLoad.set_save(saved_game_name)
 				_load_main_scene()
-				
+			
 			MOUSE_BUTTON_RIGHT:
 				print("deleting %s." % [saved_game_name])
 				SaveLoad.delete_save(saved_game_name)
@@ -96,6 +95,7 @@ func _on_load_button_saved_game_gui_input(event : InputEvent,
 				_edit_load_button()
 				if load_button.disabled:
 					_show_main_menu()
+				this.queue_free()
 
 
 func _on_new_pressed() -> void:

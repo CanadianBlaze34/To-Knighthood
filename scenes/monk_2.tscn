@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cno6m0ucnxkh0"]
+
+[ext_resource type="PackedScene" uid="uid://ds55apat6kv6b" path="res://scenes/npc.tscn" id="1_qt3px"]
+[ext_resource type="Texture2D" uid="uid://cjm17jxlpjfii" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Samurai/SpriteSheet.png" id="2_a2k3n"]
+
+[node name="Monk2" instance=ExtResource("1_qt3px")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_a2k3n")

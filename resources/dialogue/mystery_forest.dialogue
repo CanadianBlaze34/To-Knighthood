@@ -15,3 +15,40 @@ elif MysteryForestAutoload.has_initially_talked_with_monk_1() == true:
 		Monk: Can you get the slime fish already?
 
 => END
+
+
+~ monk_2
+
+if MysteryForestAutoload.is_first_time_talking_with_monk_2() == false:
+	Monk 2: Pet {{MysteryForestAutoload.raccoons_to_pet}} raccoons.
+	do MysteryForestAutoload.talked_with_monk_2_for_the_first_time()
+elif MysteryForestAutoload.has_pet_enough_raccoons() == true:
+	Monk 2: Thanks for petting the raccoons.
+	do MysteryForestAutoload.complete_monk_2_quest()
+else:
+	Monk 2: You need to pet more raccoons.
+
+=> END
+
+
+~ monk_3
+
+if MysteryForestAutoload.is_first_time_talking_with_monk_3() == false:
+	Monk 3: Kill The Legendary golden raccoon.
+	do MysteryForestAutoload.talked_with_monk_3_for_the_first_time()
+else:
+	Monk 3: Go to the Legendary golden raccoon.
+
+=> END
+
+
+~ monk_4
+
+if MysteryForestAutoload.is_first_time_talking_with_monk_4() == false:
+	Monk 4: Please excuse these 3. They're always cuasing mischeif.
+	do MysteryForestAutoload.talked_with_monk_4_for_the_first_time()
+Monk 4: You're safe to enter and exit the forest as you please.
+
+=> END
+
+

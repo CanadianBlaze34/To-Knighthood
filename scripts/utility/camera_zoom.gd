@@ -29,7 +29,7 @@ func _set_camera() -> void:
 			push_error("%ss camera is null." % [name])
 
 
-func _unhandled_input(event : InputEvent) -> void:
+func _input(event : InputEvent) -> void:
 	
 	_flip_zooming(event)
 	

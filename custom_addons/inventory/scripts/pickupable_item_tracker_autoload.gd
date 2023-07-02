@@ -200,13 +200,12 @@ func _index_at(pickupable_item, is_dropped_item : bool) -> int:
 		return index
 	
 	var item_slots : Array = _scene_items_of(pickupable_item.item.id, is_dropped_item)
-	var pickable_item_slot : Array = [pickupable_item.position, pickupable_item.quantity]
 	
 	for item_slot_index in item_slots.size():
 		var item_slot : Array = item_slots[item_slot_index]
 		
-		if (str(item_slot[position_index]) == str(pickable_item_slot[position_index]) and 
-				int(item_slot[quantity_index]) == pickable_item_slot[quantity_index]):
+		if (str(item_slot[position_index]) == str(pickupable_item.position) and 
+				int(item_slot[quantity_index]) == pickupable_item.quantity):
 			index = item_slot_index
 			break
 	

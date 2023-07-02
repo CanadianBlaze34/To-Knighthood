@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://ywmxqo3s5ydb"]
+
+[ext_resource type="PackedScene" uid="uid://ds55apat6kv6b" path="res://scenes/npc.tscn" id="1_jjnsh"]
+[ext_resource type="Script" path="res://scripts/giant_gold_raccoon.gd" id="1_m7qym"]
+[ext_resource type="Texture2D" uid="uid://cdkei57e3s2gw" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Boss/GiantRacoonGold/Idle.png" id="2_dlo1u"]
+[ext_resource type="PackedScene" uid="uid://bywnmmwprecpq" path="res://scenes/attack_box.tscn" id="3_7emkx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_so7yp"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhwty"]
+size = Vector2(16, 32)
+
+[node name="GiantGoldRaccoon" type="Node2D"]
+script = ExtResource("1_m7qym")
+
+[node name="NPC" parent="." instance=ExtResource("1_jjnsh")]
+position = Vector2(0, -7)
+
+[node name="Sprite2D" parent="NPC" index="0"]
+texture = ExtResource("2_dlo1u")
+hframes = 6
+vframes = 1
+
+[node name="CollisionShape2D" parent="NPC" index="1"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_so7yp")
+
+[node name="AttackBox" parent="." instance=ExtResource("3_7emkx")]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" parent="AttackBox" index="0"]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_mhwty")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="AttackSpeed" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="AttackBox" to="." method="_on_attack_box_area_entered"]
+[connection signal="timeout" from="AttackSpeed" to="." method="_on_attack_speed_timeout"]
+
+[editable path="NPC"]
+[editable path="AttackBox"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://t7blh3a0dmvn"]
+
+[ext_resource type="PackedScene" uid="uid://ds55apat6kv6b" path="res://scenes/npc.tscn" id="1_pc51y"]
+[ext_resource type="Script" path="res://scripts/monk_4.gd" id="2_fd6y4"]
+[ext_resource type="Texture2D" uid="uid://cp1kbugmkipvc" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Master/SpriteSheet.png" id="2_w0trk"]
+[ext_resource type="PackedScene" uid="uid://dh8v12a1kd6r2" path="res://scenes/dialogue_area.tscn" id="3_nws6d"]
+[ext_resource type="Resource" uid="uid://biygts3ly6dac" path="res://resources/dialogue/mystery_forest.dialogue" id="4_ll8e2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_higfj"]
+size = Vector2(92, 96)
+
+[node name="Monk4" instance=ExtResource("1_pc51y")]
+script = ExtResource("2_fd6y4")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_w0trk")
+
+[node name="DialogueArea" parent="." index="2" instance=ExtResource("3_nws6d")]
+dialogue_resource = ExtResource("4_ll8e2")
+dialogue_start = "monk_4"
+start_automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea" index="0"]
+shape = SubResource("RectangleShape2D_higfj")

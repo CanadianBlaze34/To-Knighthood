@@ -1,6 +1,7 @@
-[gd_scene load_steps=39 format=3 uid="uid://bv8ynml7k8xmm"]
+[gd_scene load_steps=51 format=3 uid="uid://bv8ynml7k8xmm"]
 
 [ext_resource type="PackedScene" uid="uid://054lnswde7g0" path="res://scenes/over_world_tilemap.tscn" id="1_jqylj"]
+[ext_resource type="Script" path="res://scripts/over_world.gd" id="1_jvlys"]
 [ext_resource type="Script" path="res://scripts/Village1.gd" id="2_wuwnf"]
 [ext_resource type="PackedScene" uid="uid://ds55apat6kv6b" path="res://scenes/npc.tscn" id="3_neicp"]
 [ext_resource type="Texture2D" uid="uid://dhpw6kew851yv" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/OldWoman/SpriteSheet.png" id="4_mo727"]
@@ -25,6 +26,13 @@
 [ext_resource type="Script" path="res://scripts/mystery_forest.gd" id="22_ivq1v"]
 [ext_resource type="Resource" uid="uid://biygts3ly6dac" path="res://resources/dialogue/mystery_forest.dialogue" id="23_jscjk"]
 [ext_resource type="Script" path="res://scripts/slime_fish_event.gd" id="25_18iw1"]
+[ext_resource type="Script" path="res://scripts/npc/monk_2.gd" id="25_kinb4"]
+[ext_resource type="Texture2D" uid="uid://cjm17jxlpjfii" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/Samurai/SpriteSheet.png" id="25_s1668"]
+[ext_resource type="Texture2D" uid="uid://nx1dmqinktjp" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/RedSamurai/redsamurai.png" id="26_80btw"]
+[ext_resource type="PackedScene" uid="uid://ywmxqo3s5ydb" path="res://scenes/giant_gold_raccoon.tscn" id="27_ilv8q"]
+[ext_resource type="Script" path="res://scripts/npc/monk_3.gd" id="27_v5bva"]
+[ext_resource type="PackedScene" uid="uid://dibm65q3w8fj4" path="res://scenes/raccoon.tscn" id="28_617v3"]
+[ext_resource type="Script" path="res://scripts/legendary_golden_raccoon_fight.gd" id="32_qb703"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bqob7"]
 radius = 16.0
@@ -65,11 +73,26 @@ gradient = SubResource("Gradient_6yegg")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eec5h"]
 size = Vector2(64, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbwwv"]
+size = Vector2(48, 56.0001)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oe58g"]
+size = Vector2(48, 55.9999)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36gvn"]
 size = Vector2(32, 31.9999)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1mbr"]
+size = Vector2(248, 208)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_hljmp"]
+vertices = PackedVector2Array(-88.3689, -79.3162, 127.631, -79.3162, 127.631, 88.6838, -88.3689, 88.6838)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-88.3689, -79.3162, 127.631, -79.3162, 127.631, 88.6838, -88.3689, 88.6838)])
+
 [node name="OverWorld" type="Node2D" groups=["active_scene"]]
 y_sort_enabled = true
+script = ExtResource("1_jvlys")
 
 [node name="OverWorldTilemap" parent="." instance=ExtResource("1_jqylj")]
 metadata/_edit_lock_ = true
@@ -262,6 +285,9 @@ texture = SubResource("GradientTexture2D_bbg4q")
 position = Vector2(272, 2828)
 script = ExtResource("22_gs0r4")
 
+[node name="Sprite2D" parent="MysteryForest/NPCs/Monk 1" index="0"]
+texture = ExtResource("8_v6ncx")
+
 [node name="DialogueArea" parent="MysteryForest/NPCs/Monk 1" instance=ExtResource("5_ji4vk")]
 dialogue_resource = ExtResource("23_jscjk")
 dialogue_start = "monk_1"
@@ -271,7 +297,71 @@ start_automatic = true
 position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_eec5h")
 
+[node name="Monk2" parent="MysteryForest/NPCs" instance=ExtResource("3_neicp")]
+position = Vector2(464, 2440)
+script = ExtResource("25_kinb4")
+
+[node name="Sprite2D" parent="MysteryForest/NPCs/Monk2" index="0"]
+texture = ExtResource("25_s1668")
+
+[node name="DialogueArea" parent="MysteryForest/NPCs/Monk2" instance=ExtResource("5_ji4vk")]
+dialogue_resource = ExtResource("23_jscjk")
+dialogue_start = "monk_2"
+start_automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MysteryForest/NPCs/Monk2/DialogueArea"]
+position = Vector2(8, 4.00024)
+shape = SubResource("RectangleShape2D_jbwwv")
+
+[node name="Monk3" parent="MysteryForest/NPCs" instance=ExtResource("3_neicp")]
+position = Vector2(640, 2280)
+script = ExtResource("27_v5bva")
+
+[node name="Sprite2D" parent="MysteryForest/NPCs/Monk3" index="0"]
+texture = ExtResource("26_80btw")
+
+[node name="DialogueArea" parent="MysteryForest/NPCs/Monk3" instance=ExtResource("5_ji4vk")]
+dialogue_resource = ExtResource("23_jscjk")
+dialogue_start = "monk_3"
+start_automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MysteryForest/NPCs/Monk3/DialogueArea"]
+position = Vector2(-8, 4.00024)
+shape = SubResource("RectangleShape2D_oe58g")
+
 [node name="Monsters" type="Node2D" parent="MysteryForest"]
+
+[node name="GiantGoldRaccoon" parent="MysteryForest/Monsters" instance=ExtResource("27_ilv8q")]
+position = Vector2(128, 3104)
+
+[node name="Racoons" type="Node2D" parent="MysteryForest/Monsters"]
+
+[node name="Raccoon" parent="MysteryForest/Monsters/Racoons" instance=ExtResource("28_617v3")]
+position = Vector2(789, 2575)
+
+[node name="Raccoon2" parent="MysteryForest/Monsters/Racoons" instance=ExtResource("28_617v3")]
+position = Vector2(823, 2589)
+
+[node name="Raccoon3" parent="MysteryForest/Monsters/Racoons" instance=ExtResource("28_617v3")]
+position = Vector2(809, 2629)
+
+[node name="Raccoon4" parent="MysteryForest/Monsters/Racoons" instance=ExtResource("28_617v3")]
+position = Vector2(852, 2616)
+
+[node name="Raccoon5" parent="MysteryForest/Monsters/Racoons" instance=ExtResource("28_617v3")]
+position = Vector2(953, 2724)
+
+[node name="Raccoon6" parent="MysteryForest/Monsters/Racoons" instance=ExtResource("28_617v3")]
+position = Vector2(1000, 2736)
+
+[node name="Raccoon7" parent="MysteryForest/Monsters/Racoons" instance=ExtResource("28_617v3")]
+position = Vector2(908, 2755)
+
+[node name="Raccoon8" parent="MysteryForest/Monsters/Racoons" instance=ExtResource("28_617v3")]
+position = Vector2(933, 2771)
+
+[node name="Raccoon9" parent="MysteryForest/Monsters/Racoons" instance=ExtResource("28_617v3")]
+position = Vector2(997, 2772)
 
 [node name="Events" type="Node2D" parent="MysteryForest"]
 
@@ -284,6 +374,28 @@ script = ExtResource("25_18iw1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MysteryForest/Events/SlimeFishEvent/Area2D"]
 shape = SubResource("RectangleShape2D_36gvn")
 
+[node name="LegendaryGoldenRaccoonFight" type="Node2D" parent="MysteryForest/Events"]
+position = Vector2(128, 3151)
+script = ExtResource("32_qb703")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="MysteryForest/Events/LegendaryGoldenRaccoonFight"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MysteryForest/Events/LegendaryGoldenRaccoonFight/Area2D"]
+position = Vector2(20, 9)
+shape = SubResource("RectangleShape2D_s1mbr")
+metadata/_edit_lock_ = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="MysteryForest/Events/LegendaryGoldenRaccoonFight"]
+position = Vector2(0.368896, 0.316162)
+navigation_polygon = SubResource("NavigationPolygon_hljmp")
+metadata/_edit_lock_ = true
+
+[connection signal="hit" from="MysteryForest/Monsters/GiantGoldRaccoon" to="." method="_on_giant_gold_raccoon_hit"]
+[connection signal="player_enter" from="MysteryForest/Events/LegendaryGoldenRaccoonFight" to="." method="_on_legendary_golden_raccoon_fight_player_enter"]
+[connection signal="body_entered" from="MysteryForest/Events/LegendaryGoldenRaccoonFight/Area2D" to="MysteryForest/Events/LegendaryGoldenRaccoonFight" method="_on_area_2d_body_entered"]
+
 [editable path="Village1/NPCs/Ashley"]
 [editable path="Village1/NPCs/Jill"]
 [editable path="Village1/NPCs/Chief Dave"]
@@ -292,3 +404,9 @@ shape = SubResource("RectangleShape2D_36gvn")
 [editable path="Village1/NPCs/Cat"]
 [editable path="Village1/NPCs/Yellow (Town Guard)"]
 [editable path="Village1/NPCs/Yellow (Town Guard)/DialogueArea"]
+[editable path="MysteryForest/NPCs/Monk 1"]
+[editable path="MysteryForest/NPCs/Monk2"]
+[editable path="MysteryForest/NPCs/Monk3"]
+[editable path="MysteryForest/Monsters/GiantGoldRaccoon"]
+[editable path="MysteryForest/Monsters/GiantGoldRaccoon/NPC"]
+[editable path="MysteryForest/Monsters/GiantGoldRaccoon/AttackBox"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3drhf86ainjj"]
+
+[ext_resource type="PackedScene" uid="uid://ds55apat6kv6b" path="res://scenes/npc.tscn" id="1_lcda4"]
+[ext_resource type="Texture2D" uid="uid://uwloavlwilfx" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/OldMan3/SpriteSheet.png" id="2_267eu"]
+
+[node name="Monk1" instance=ExtResource("1_lcda4")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_267eu")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://yaqit3xas364"]
+
+[ext_resource type="PackedScene" uid="uid://ds55apat6kv6b" path="res://scenes/npc.tscn" id="1_4u5ay"]
+[ext_resource type="Texture2D" uid="uid://nx1dmqinktjp" path="res://assets/NinjaAdventure(SupporterEdition)/Actor/Characters/RedSamurai/redsamurai.png" id="2_x68xr"]
+
+[node name="Monk3" instance=ExtResource("1_4u5ay")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_x68xr")

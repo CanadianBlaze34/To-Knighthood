@@ -53,8 +53,7 @@ Linear gameplay
 			-kill slime creatures and they'll drop a slime-goo
 			-place several slime-goo by a dock and to attract slime fish
 	-second monk
-		-kill a bear with only eggs
-		-can get eggs by shaking trees
+		-pet 5 raccoons
 	-third monk
 		-leads you to the legendary golden raccoon
 		-hitting it does no damage
